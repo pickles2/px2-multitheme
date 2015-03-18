@@ -12,16 +12,46 @@ class theme{
 	private $path_tpl;
 	private $page;
 	private $theme_id;
-	private $path_theme_collection;
 
 	/**
 	 * constructor
 	 */
 	public function __construct($px){
 		$this->px = $px;
-		$this->theme_id = 'pickles';
-		$this->path_theme_collection = $px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
-		$this->path_tpl = $px->fs()->get_realpath( $this->path_theme_collection.'/'.$this->theme_id ).DIRECTORY_SEPARATOR;
+		$this->theme_id = @$px->conf()->plugins->multitheme->default_theme_id;
+		if( !strlen( $this->theme_id ) ){
+			$this->theme_id = 'default';
+		}
+
+		$theme_collection = $px->conf()->plugins->multitheme->theme_list;
+		if( !is_array( $theme_collection ) ){ $theme_collection = array(); }
+
+		$path_theme_collection = $px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
+		foreach( $px->fs()->ls( $path_theme_collection ) as $theme_id ){
+			$theme_collection[$theme_id] = [
+				'id'=>$theme_id,
+				'path'=>$px->fs()->get_realpath( $path_theme_collection.'/'.$theme_id ).DIRECTORY_SEPARATOR
+			];
+		}
+
+		if( strlen( $px->req()->get_param('THEME') ) ){
+			if( @is_array( $theme_collection[$px->req()->get_param('THEME')] ) ){
+				if( $this->theme_id == $px->req()->get_param('THEME') ){
+					$px->req()->delete_cookie( 'THEME' );
+				}else{
+					$this->theme_id = $px->req()->get_param('THEME');
+					$px->req()->set_cookie( 'THEME', $this->theme_id );
+				}
+			}
+		}
+		if( strlen( @$px->req()->get_cookie('THEME') ) ){
+			$this->theme_id = @$px->req()->get_cookie('THEME');
+		}
+
+
+		$this->path_tpl = $theme_collection[$this->theme_id]['path'];
+
+
 		$this->page = $this->px->site()->get_current_page_info();
 		if( @!strlen( $this->page['layout'] ) ){
 			$this->page['layout'] = 'default';

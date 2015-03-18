@@ -146,5 +146,16 @@ return call_user_func( function(){
 	];
 
 
+
+	// config for Plugins.
+// 	$conf->plugins = new stdClass;
+
+	// config for Pickles2 Desktop Tool.
+//	$conf->plugins->multitheme = new stdClass;
+	@$conf->plugins->multitheme->theme_list = [];
+	@$conf->plugins->multitheme->default_theme_id = 'default';
+
+
+
 	return $conf;
 } );
