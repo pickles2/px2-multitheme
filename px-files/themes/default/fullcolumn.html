@@ -39,22 +39,13 @@
 		<div class="theme_mainblock">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-12">
 						<div class="theme_breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
 						<h1><?= preg_replace('/\r\n|\r|\n/s', '<br />', htmlspecialchars($px->site()->get_current_page_info( 'title_h1' )) ); ?></h1>
 						<div class="contents">
 <?= $px->bowl()->pull() ?>
 						</div>
 						<div class="theme_breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
-					</div>
-					<div class="col-sm-3">
-						<nav class="theme_common_navi">
-<?php
-	$category_top_id = $px->site()->get_category_top();
-?>
-							<p><a href="<?= htmlspecialchars( $px->href($category_top_id) ) ?>"><?= htmlspecialchars($px->site()->get_page_info($category_top_id, 'title_label')) ?></a></p>
-<?= $theme->mk_sub_menu( $category_top_id ) ?>
-						</nav>
 					</div>
 				</div><!-- /.row -->
 			</div><!-- /.container -->

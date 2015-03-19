@@ -18,7 +18,7 @@ pre code{
  * ヘッダー
  */
 .theme_header{
-	background-color: #666;
+	background-color: #00a0e6;
 	padding:1em 0 1px 0;
 }
 
@@ -46,6 +46,10 @@ pre code{
 }
 .theme_si *:hover{
 	color: #eee;
+}
+.theme_si:before{
+	content: url('data:image/svg+xml;base64,<?= base64_encode( $px->get_pickles_logo_svg() ) ?>');
+	margin: 0 20px 0 0;
 }
 
 /**

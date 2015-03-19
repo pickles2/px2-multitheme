@@ -11,45 +11,40 @@ class theme{
 	private $px;
 	private $path_tpl;
 	private $page;
-	private $theme_id;
+	private $theme_id = 'default';
+	private $theme_collection = array();
+
+	/**
+	 * entry method
+	 */
+	public static function exec( $px ){
+		$theme = new self($px);
+		$src = $theme->bind($px);
+		$px->bowl()->replace($src, '');
+		return true;
+	}
 
 	/**
 	 * constructor
 	 */
 	public function __construct($px){
 		$this->px = $px;
-		$this->theme_id = @$px->conf()->plugins->multitheme->default_theme_id;
-		if( !strlen( $this->theme_id ) ){
-			$this->theme_id = 'default';
-		}
 
-		$theme_collection = $px->conf()->plugins->multitheme->theme_list;
-		if( !is_array( $theme_collection ) ){ $theme_collection = array(); }
+		$this->theme_collection = $px->conf()->plugins->multitheme->theme_list;
+		if( !is_array( $this->theme_collection ) ){ $this->theme_collection = array(); }
 
 		$path_theme_collection = $px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
 		foreach( $px->fs()->ls( $path_theme_collection ) as $theme_id ){
-			$theme_collection[$theme_id] = [
+			$this->theme_collection[$theme_id] = [
 				'id'=>$theme_id,
 				'path'=>$px->fs()->get_realpath( $path_theme_collection.'/'.$theme_id ).DIRECTORY_SEPARATOR
 			];
 		}
 
-		if( strlen( $px->req()->get_param('THEME') ) ){
-			if( @is_array( $theme_collection[$px->req()->get_param('THEME')] ) ){
-				if( $this->theme_id == $px->req()->get_param('THEME') ){
-					$px->req()->delete_cookie( 'THEME' );
-				}else{
-					$this->theme_id = $px->req()->get_param('THEME');
-					$px->req()->set_cookie( 'THEME', $this->theme_id );
-				}
-			}
-		}
-		if( strlen( @$px->req()->get_cookie('THEME') ) ){
-			$this->theme_id = @$px->req()->get_cookie('THEME');
-		}
+		$this->auto_select_theme();
 
 
-		$this->path_tpl = $theme_collection[$this->theme_id]['path'];
+		$this->path_tpl = $this->theme_collection[$this->theme_id]['path'];
 
 
 		$this->page = $this->px->site()->get_current_page_info();
@@ -64,12 +59,29 @@ class theme{
 	}
 
 	/**
-	 * entry method
+	 * auto select theme
 	 */
-	public static function exec( $px ){
-		$theme = new self($px);
-		$src = $theme->bind($px);
-		$px->bowl()->replace($src, '');
+	private function auto_select_theme(){
+		$this->theme_id = @$this->px->conf()->plugins->multitheme->default_theme_id;
+		if( !strlen( $this->theme_id ) ){
+			$this->theme_id = 'default';
+		}
+		if( strlen( $this->px->req()->get_param('THEME') ) ){
+			if( @is_array( $this->theme_collection[$this->px->req()->get_param('THEME')] ) ){
+				$this->theme_id = $this->px->req()->get_param('THEME');
+				$this->px->req()->set_cookie( 'THEME', $this->theme_id );
+			}
+		}
+		if( strlen( @$this->px->req()->get_cookie('THEME') ) ){
+			$this->theme_id = @$this->px->req()->get_cookie('THEME');
+		}
+		if( $this->theme_id == @$this->px->conf()->plugins->multitheme->default_theme_id ){
+			$this->px->req()->delete_cookie( 'THEME' );
+		}
+		if( @!is_array( $this->theme_collection[$this->theme_id] ) ){
+			$this->theme_id = 'default';
+		}
+
 		return true;
 	}
 
@@ -467,6 +479,7 @@ class theme{
 		$rgb = array( 'r'=>$tmp_rgb['r'] , 'g'=>$tmp_rgb['g'] , 'b'=>$tmp_rgb['b'] );
 		return	$rgb;
 	}
+
 	/**
 	 * HSB値から16進数のRGBコードを得る。
 	 * 
