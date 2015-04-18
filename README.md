@@ -1,7 +1,7 @@
 px2-multitheme
 ==============
 
-*px2-multitheme* は、[Pickles2](http://pickles2.pxt.jp/) に、複数のテーマを同時に管理、スイッチする機能を追加します。
+*px2-multitheme* は、複数のテーマを同時に管理する機能を [Pickles2](http://pickles2.pxt.jp/) に追加します。
 
 
 ## ライセンス - License
