@@ -52,7 +52,7 @@ Pickles 2 をセットアップします。
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
 			'path_theme_collection'=>'./px-files/themes/',
-			'default_theme_id'=>'pickles'
+			'default_theme_id'=>'pickles2'
 		]).')' ,
 
 	];
