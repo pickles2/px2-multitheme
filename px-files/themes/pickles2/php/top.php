@@ -28,22 +28,22 @@ class theme_top{
 	public function get_color_scheme(){
 		$colors = array();
 		$colors['main'] = '#00a0e6';
-		$hsb = $this->theme->color_hex2hsb( $colors['main'] );
+		// $hsb = $this->theme->color_hex2hsb( $colors['main'] );
 
-		$colors['thin'] = $this->theme->color_hsb2hex($hsb['h'], $hsb['s']-($hsb['s']/4*3), $hsb['b']+((100-$hsb['b'])/4*3));
+		// $colors['thin'] = $this->theme->color_hsb2hex($hsb['h'], $hsb['s']-($hsb['s']/4*3), $hsb['b']+((100-$hsb['b'])/4*3));
 
 		$colors['link'] = $colors['main'];
 		$colors['text'] = '#333';
 		$colors['white'] = '#fff';
 		$colors['black'] = '#333';
 
-		if( $hsb['s'] < 50 && $hsb['b'] > 50 ){
-			// $colors['link'] = '#00f';
-			$colors['thin'] = $colors['main'];
-			$colors['link'] = '#000';
-			$colors['white'] = '#333';
-			$colors['black'] = '#fff';
-		}
+		// if( $hsb['s'] < 50 && $hsb['b'] > 50 ){
+		// 	// $colors['link'] = '#00f';
+		// 	$colors['thin'] = $colors['main'];
+		// 	$colors['link'] = '#000';
+		// 	$colors['white'] = '#333';
+		// 	$colors['black'] = '#fff';
+		// }
 		return $colors;
 	}//get_color_scheme()
 

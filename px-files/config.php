@@ -105,7 +105,9 @@ return call_user_func( function(){
 		'picklesFramework2\processors\autoindex\autoindex::exec' ,
 
 		// テーマ
-		'theme'=>'tomk79\pickles2\multitheme\theme::exec' , 
+		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
+			'default_theme_id'=>'pickles2'
+		]).')' , 
 
 		// Apache互換のSSIの記述を解決する
 		'picklesFramework2\processors\ssi\ssi::exec' ,
@@ -144,18 +146,6 @@ return call_user_func( function(){
 	// funcs: Before output
 	$conf->funcs->before_output = [
 	];
-
-
-
-	// config for Plugins.
-// 	$conf->plugins = new stdClass;
-
-	// config for Pickles2 Desktop Tool.
-//	$conf->plugins->multitheme = new stdClass;
-	@$conf->plugins->multitheme->theme_list = [];
-	@$conf->plugins->multitheme->default_theme_id = 'default';
-
-
 
 	return $conf;
 } );
