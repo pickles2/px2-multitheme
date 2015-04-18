@@ -37,9 +37,9 @@ class theme{
 			$this->conf->path_theme_collection = $this->px->fs()->get_realpath($options->path_theme_collection.DIRECTORY_SEPARATOR);
 		}
 		$this->conf->default_theme_id = 'default';
-		if( strlen(@$this->px->conf()->plugins->multitheme->default_theme_id) ){
-			$this->conf->default_theme_id = $this->px->conf()->plugins->multitheme->default_theme_id;
-		}
+		// if( strlen(@$this->px->conf()->plugins->multitheme->default_theme_id) ){
+		// 	$this->conf->default_theme_id = $this->px->conf()->plugins->multitheme->default_theme_id;
+		// }
 		if( strlen(@$options->default_theme_id) ){
 			$this->conf->default_theme_id = $options->default_theme_id;
 		}
@@ -74,7 +74,7 @@ class theme{
 	 * auto select theme
 	 */
 	private function auto_select_theme(){
-		$this->theme_id = @$this->px->conf()->plugins->multitheme->default_theme_id;
+		$this->theme_id = @$this->conf->default_theme_id;
 		if( !strlen( $this->theme_id ) ){
 			$this->theme_id = 'default';
 		}
@@ -87,7 +87,7 @@ class theme{
 		if( strlen( @$this->px->req()->get_cookie('THEME') ) ){
 			$this->theme_id = @$this->px->req()->get_cookie('THEME');
 		}
-		if( $this->theme_id == @$this->px->conf()->plugins->multitheme->default_theme_id ){
+		if( $this->theme_id == @$this->conf->default_theme_id ){
 			$this->px->req()->delete_cookie( 'THEME' );
 		}
 		if( @!is_array( $this->theme_collection[$this->theme_id] ) ){
