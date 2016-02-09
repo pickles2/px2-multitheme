@@ -8,12 +8,12 @@ px2-multitheme
 
 Pickles 2 をセットアップします。
 
-`composer.json` に、`"tomk79/px2-multitheme": "dev-master"` を追加します。
+`composer.json` に、`"pickles2/px2-multitheme": "dev-master"` を追加します。
 
 ```
 {
     "require": {
-        "tomk79/px2-multitheme": "dev-master"
+        "pickles2/px2-multitheme": "dev-master"
     }
 }
 ```
@@ -77,5 +77,5 @@ MIT License
 ### テスト - Test
 
 ```
-$ ./vendor/phpunit/phpunit/phpunit px-files/tests/mainTest.php main
+$ php ./vendor/phpunit/phpunit/phpunit
 ```
