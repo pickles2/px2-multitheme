@@ -33,7 +33,7 @@
 		</header>
 		<div class="theme_mainblock">
 			<div class="container">
-				<div class="contents">
+				<div class="contents" <?= htmlspecialchars($theme->conf->attr_bowl_name_by)?>="main">
 <?= $px->bowl()->pull() ?>
 				</div>
 			</div><!-- /.container -->
@@ -58,5 +58,6 @@
 				<p style="text-align:center;">Pickles Framework is made by &copy;Tomoya Koyanagi.</p>
 			</div>
 		</footer>
+<?= $px->bowl()->pull('foot') ?>
 	</body>
 </html>

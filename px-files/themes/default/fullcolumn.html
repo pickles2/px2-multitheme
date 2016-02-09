@@ -42,7 +42,7 @@
 					<div class="col-sm-12">
 						<div class="theme_breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
 						<h1><?= preg_replace('/\r\n|\r|\n/s', '<br />', htmlspecialchars($px->site()->get_current_page_info( 'title_h1' )) ); ?></h1>
-						<div class="contents">
+						<div class="contents" <?= htmlspecialchars($theme->conf->attr_bowl_name_by)?>="main">
 <?= $px->bowl()->pull() ?>
 						</div>
 						<div class="theme_breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
@@ -71,5 +71,6 @@
 				<p style="text-align:center;">Pickles Framework is made by &copy;Tomoya Koyanagi.</p>
 			</div>
 		</footer>
+<?= $px->bowl()->pull('foot') ?>
 	</body>
 </html>

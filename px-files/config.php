@@ -109,6 +109,8 @@ return call_user_func( function(){
 
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
+			'path_theme_collection'=>'./px-files/themes/',
+			'attr_bowl_name_by'=>'data-contents-area',
 			'default_theme_id'=>'pickles2'
 		]).')' ,
 

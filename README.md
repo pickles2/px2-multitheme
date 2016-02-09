@@ -41,6 +41,11 @@ Pickles 2 をセットアップします。
 
 初期値は `./px-files/themes/` です。
 
+### bowl名(コンテンツエリア名)を格納する属性名 - attr_bowl_name_by
+
+Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2DesktopTool は、ここに設定した属性の値からbowl名を取得し、GUI編集画面の構成するように振る舞います。
+デフォルトは `data-contents-area` です。
+
 ### デフォルトのテーマID - default_theme_id
 
 デフォルトで適用するテーマのIDです。初期値は `default` です。
@@ -52,6 +57,7 @@ Pickles 2 をセットアップします。
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
 			'path_theme_collection'=>'./px-files/themes/',
+			'attr_bowl_name_by'=>'data-contents-area',
 			'default_theme_id'=>'pickles2'
 		]).')' ,
 

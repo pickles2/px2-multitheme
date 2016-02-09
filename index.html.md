@@ -12,6 +12,7 @@
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
 			'path_theme_collection'=>'./vendor/tomk79/px2-multitheme/px-files/themes/',
+			'attr_bowl_name_by'=>'data-contents-area',
 			'default_theme_id'=>'default'
 		]).')' ,
 
@@ -22,4 +23,3 @@
 ## namespace
 
 `tomk79\pickles2\multitheme` を宣言します。
-

@@ -43,6 +43,10 @@ class theme{
 		if( strlen(@$options->default_theme_id) ){
 			$this->conf->default_theme_id = $options->default_theme_id;
 		}
+		$this->conf->attr_bowl_name_by = 'data-contents-area';
+		if( strlen(@$options->attr_bowl_name_by) ){
+			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
+		}
 
 
 		$this->theme_collection = [];
@@ -149,7 +153,7 @@ class theme{
 	}
 	/**
 	 * 指定されたページの小階層のメニューを展開する
-	 * 
+	 *
 	 * @param string $parent_page_id 親ページのページID
 	 * @return string ページリストのHTMLソース
 	 */
