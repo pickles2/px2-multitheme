@@ -71,7 +71,12 @@ class theme{
 			$this->page['layout'] = 'default';
 		}
 		// $this->px->realpath_plugin_private_cache('/test/abc/test.inc');
-		$this->px->fs()->copy_r( $this->path_tpl.'/theme_files/', $this->px->realpath_plugin_files('/') );
+		if( is_dir($this->path_tpl.'/theme_files/') ){
+			$this->px->fs()->copy_r(
+				$this->path_tpl.'/theme_files/' ,
+				$this->px->realpath_plugin_files('/')
+			);
+		}
 	}
 
 	/**
@@ -84,6 +89,8 @@ class theme{
 		}
 		if( strlen( $this->px->req()->get_param('THEME') ) ){
 			if( @is_array( $this->theme_collection[$this->px->req()->get_param('THEME')] ) ){
+				$plugin_cache_dir = $this->px->realpath_plugin_files('/');
+				$this->px->fs()->rm($plugin_cache_dir);// ← テーマを切り替える際に、公開キャッシュを一旦削除する
 				$this->theme_id = $this->px->req()->get_param('THEME');
 				$this->px->req()->set_cookie( 'THEME', $this->theme_id );
 			}
