@@ -11,6 +11,8 @@ class theme{
 	private $px;
 	private $path_tpl;
 	private $page;
+	private $param_theme_switch = 'THEME';
+	private $cookie_theme_switch = 'THEME';
 	private $theme_id = 'default';
 	private $theme_collection;
 	private $conf;
@@ -47,6 +49,13 @@ class theme{
 		if( strlen(@$options->attr_bowl_name_by) ){
 			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
 		}
+		if( strlen(@$options->param_theme_switch) ){
+			$this->param_theme_switch = $options->param_theme_switch;
+		}
+		if( strlen(@$options->cookie_theme_switch) ){
+			$this->cookie_theme_switch = $options->cookie_theme_switch;
+		}
+
 
 
 		$this->theme_collection = [];
@@ -87,19 +96,19 @@ class theme{
 		if( !strlen( $this->theme_id ) ){
 			$this->theme_id = 'default';
 		}
-		if( strlen( $this->px->req()->get_param('THEME') ) ){
-			if( @is_array( $this->theme_collection[$this->px->req()->get_param('THEME')] ) ){
+		if( strlen( $this->px->req()->get_param($this->param_theme_switch) ) ){
+			if( @is_array( $this->theme_collection[$this->px->req()->get_param($this->param_theme_switch)] ) ){
 				$plugin_cache_dir = $this->px->realpath_plugin_files('/');
 				$this->px->fs()->rm($plugin_cache_dir);// ← テーマを切り替える際に、公開キャッシュを一旦削除する
-				$this->theme_id = $this->px->req()->get_param('THEME');
-				$this->px->req()->set_cookie( 'THEME', $this->theme_id );
+				$this->theme_id = $this->px->req()->get_param($this->param_theme_switch);
+				$this->px->req()->set_cookie( $this->cookie_theme_switch, $this->theme_id );
 			}
 		}
-		if( strlen( @$this->px->req()->get_cookie('THEME') ) ){
-			$this->theme_id = @$this->px->req()->get_cookie('THEME');
+		if( strlen( @$this->px->req()->get_cookie($this->cookie_theme_switch) ) ){
+			$this->theme_id = @$this->px->req()->get_cookie($this->cookie_theme_switch);
 		}
 		if( $this->theme_id == @$this->conf->default_theme_id ){
-			$this->px->req()->delete_cookie( 'THEME' );
+			$this->px->req()->delete_cookie( $this->cookie_theme_switch );
 		}
 		if( @!is_array( $this->theme_collection[$this->theme_id] ) ){
 			$this->theme_id = 'default';

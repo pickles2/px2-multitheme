@@ -34,6 +34,14 @@ Pickles 2 をセットアップします。
 
 ## オプション - Options
 
+### パラメータ名 - param_theme_switch
+
+テーマ切り替えスイッチとして使用するGETパラメータ名を設定します。デフォルトは `THEME` です。
+
+### クッキー名 -  cookie_theme_switch
+
+切り替えたテーマ名を記憶するクッキー名を設定します。デフォルトは `THEME` です。
+
 ### テーマコレクションディレクトリ - path_theme_collection
 
 テーマ格納ディレクトリのパスを設定します。
@@ -56,6 +64,8 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 	$conf->funcs->processor->html = [
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
+			'param_theme_switch'=>'THEME',
+			'cookie_theme_switch'=>'THEME',
 			'path_theme_collection'=>'./px-files/themes/',
 			'attr_bowl_name_by'=>'data-contents-area',
 			'default_theme_id'=>'pickles2'
