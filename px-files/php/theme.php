@@ -119,6 +119,12 @@ class theme{
 		return $src;
 	}
 
+	/**
+	 * $conf->attr_bowl_name_by 設定の値を受け取る
+	 */
+	public function get_attr_bowl_name_by(){
+		return $this->conf->attr_bowl_name_by;
+	}
 
 	/**
 	 * グローバルナビを自動生成する
