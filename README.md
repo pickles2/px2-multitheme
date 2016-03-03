@@ -49,6 +49,8 @@ Pickles 2 をセットアップします。
 
 初期値は `./px-files/themes/` です。
 
+px2-multitheme はこのディレクトリの他にも、vendor ディレクトリにロードされたパッケージの一覧を検索し、theme が実装されたパッケージを選択候補に加えます。
+
 ### bowl名(コンテンツエリア名)を格納する属性名 - attr_bowl_name_by
 
 Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2DesktopTool は、ここに設定した属性の値からbowl名を取得し、GUI編集画面の構成するように振る舞います。
@@ -57,6 +59,9 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 ### デフォルトのテーマID - default_theme_id
 
 デフォルトで適用するテーマのIDです。初期値は `default` です。
+
+テーマコレクションディレクトリに定義されたテーマを指定する場合は `theme_id` などの様にディレクトリ名を、composerパッケージからテーマを指定する場合は `vendorname/packagename` のように、スラッシュで区切られたパッケージ名を設定します。
+
 
 ### オプションの実装例
 
@@ -74,6 +79,11 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 	];
 
 ```
+
+
+### テーマパッケージの開発
+
+`/theme/default.html` に、デフォルトのレイアウトをセットしてください。 `/theme/` 以下の構成は、テーマコレクションと同じです。
 
 
 ## ライセンス - License

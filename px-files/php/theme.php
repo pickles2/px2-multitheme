@@ -59,13 +59,46 @@ class theme{
 
 
 		$this->theme_collection = [];
+
+		// テーマコレクションを作成
 		foreach( $px->fs()->ls( $this->conf->path_theme_collection ) as $theme_id ){
 			$this->theme_collection[$theme_id] = [
 				'id'=>$theme_id,
-				'path'=>$px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$theme_id ).DIRECTORY_SEPARATOR
+				'path'=>$px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$theme_id.'/' ),
+				'type'=>'collection'
 			];
 		}
 
+		// vendorディレクトリ内から検索
+		$tmp_composer_root_dir = $px->fs()->get_realpath( '.' );
+		// var_dump($tmp_composer_root_dir);
+		while(1){
+			if( $px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) && $px->fs()->is_file( $tmp_composer_root_dir.'/composer.json' ) ){
+				break;
+			}
+			if( realpath($tmp_composer_root_dir) == realpath( dirname($tmp_composer_root_dir) ) ){
+				$tmp_composer_root_dir = false;
+				break;
+			}
+			$tmp_composer_root_dir = dirname($tmp_current_dir);
+			continue;
+		}
+		// var_dump( $tmp_composer_root_dir );
+		foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
+			if( !$px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) ){ continue; }
+			foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) as $package_id ){
+				if( $px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ) ){
+					$this->theme_collection[$vendor_id.'/'.$package_id] = [
+						'id'=>$vendor_id.'/'.$package_id,
+						'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ),
+						'type'=>'vendor'
+					];
+				}
+			}
+		}
+		// var_dump($this->theme_collection);
+
+		// テーマを選択する
 		$this->auto_select_theme();
 
 
