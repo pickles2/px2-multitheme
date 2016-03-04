@@ -84,15 +84,17 @@ class theme{
 			continue;
 		}
 		// var_dump( $tmp_composer_root_dir );
-		foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
-			if( !$px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) ){ continue; }
-			foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) as $package_id ){
-				if( $px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ) ){
-					$this->theme_collection[$vendor_id.'/'.$package_id] = [
-						'id'=>$vendor_id.'/'.$package_id,
-						'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ),
-						'type'=>'vendor'
-					];
+		if( $px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) ){
+			foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
+				if( !$px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) ){ continue; }
+				foreach( $px->fs()->ls( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) as $package_id ){
+					if( $px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ) ){
+						$this->theme_collection[$vendor_id.'/'.$package_id] = [
+							'id'=>$vendor_id.'/'.$package_id,
+							'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ),
+							'type'=>'vendor'
+						];
+					}
 				}
 			}
 		}
