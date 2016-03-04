@@ -73,7 +73,12 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 			'cookie_theme_switch'=>'THEME',
 			'path_theme_collection'=>'./px-files/themes/',
 			'attr_bowl_name_by'=>'data-contents-area',
-			'default_theme_id'=>'pickles2'
+			'default_theme_id'=>'pickles2',
+			'options'=>array(
+				'pickles2'=>array( // テーマ pickles2 に対するオプション
+					'sample_param'=>'hoge'
+				)
+			)
 		]).')' ,
 
 	];

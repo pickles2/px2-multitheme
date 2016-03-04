@@ -15,6 +15,7 @@ class theme{
 	private $cookie_theme_switch = 'THEME';
 	private $theme_id = 'default';
 	private $theme_collection;
+	private $theme_options;
 	private $conf;
 
 	/**
@@ -56,7 +57,9 @@ class theme{
 			$this->cookie_theme_switch = $options->cookie_theme_switch;
 		}
 
-
+		$this->theme_options = (@$options->options ? $options->options : new \stdClass());
+		$this->theme_options = json_decode( json_encode($this->theme_options), true );
+		// var_dump($this->theme_options);
 
 		$this->theme_collection = [];
 
@@ -161,6 +164,13 @@ class theme{
 		include( $this->path_tpl.$this->page['layout'].'.html' );
 		$src = ob_get_clean();
 		return $src;
+	}
+
+	/**
+	 * テーマごとのオプションを取得する
+	 */
+	public function get_option($key){
+		return @$this->theme_options[$this->theme_id][$key];
 	}
 
 	/**
