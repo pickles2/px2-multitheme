@@ -124,7 +124,7 @@ class theme{
 				$this->px->realpath_plugin_files('/')
 			);
 		}
-	}
+	} // __construct()
 
 	/**
 	 * auto select theme
@@ -171,6 +171,13 @@ class theme{
 	 */
 	public function get_option($key){
 		return @$this->theme_options[$this->theme_id][$key];
+	}
+
+	/**
+	 * 選択されたレイアウト名を取得する
+	 */
+	public function get_layout(){
+		return @$this->page['layout'];
 	}
 
 	/**
