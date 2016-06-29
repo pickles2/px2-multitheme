@@ -238,7 +238,9 @@ class theme{
 			$rtn .= '<ul>'."\n";
 			foreach( $children as $child ){
 				$rtn .= '<li>'.$this->px->mk_link( $child );
-				$rtn .= $this->mk_sub_menu( $child );//←再帰的呼び出し
+				if( $this->px->site()->is_page_in_breadcrumb( $child ) ){
+					$rtn .= $this->mk_sub_menu( $child );//←再帰的呼び出し
+				}
 				$rtn .= '</li>'."\n";
 			}
 			$rtn .= '</ul>'."\n";
