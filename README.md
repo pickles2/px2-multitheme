@@ -1,6 +1,37 @@
 pickles2/px2-multitheme
 ==============
 
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Linux</th>
+      <th>Windows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>master</th>
+      <td align="center">
+        <a href="https://travis-ci.org/pickles2/px2-multitheme"><img src="https://secure.travis-ci.org/pickles2/px2-multitheme.svg?branch=master"></a>
+      </td>
+      <td align="center">
+        <a href="https://ci.appveyor.com/project/tomk79/px2-multitheme"><img src="https://ci.appveyor.com/api/projects/status/04h4o82cuavxmkwk/branch/master?svg=true"></a>
+      </td>
+    </tr>
+    <tr>
+      <th>develop</th>
+      <td align="center">
+        <a href="https://travis-ci.org/pickles2/px2-multitheme"><img src="https://secure.travis-ci.org/pickles2/px2-multitheme.svg?branch=develop"></a>
+      </td>
+      <td align="center">
+        <a href="https://ci.appveyor.com/project/tomk79/px2-multitheme"><img src="https://ci.appveyor.com/api/projects/status/04h4o82cuavxmkwk/branch/develop?svg=true"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 *px2-multitheme* は、複数のテーマを同時に管理する機能を [Pickles2](http://pickles2.pxt.jp/) に追加します。
 
 
