@@ -12,6 +12,9 @@
     "scripts":{
         "test": [
             "php ./vendor/phpunit/phpunit/phpunit"
+        ],
+        "documentation": [
+            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
         ]
     } ,
     "repositories": [
@@ -24,7 +27,8 @@
         "tomk79/filesystem": "1.*",
         "pickles2/broccoli-module-plain-html-elements": "dev-develop",
         "pickles2/px2-px2dthelper": "dev-develop",
-        "pickles2/px-fw-2.x": "dev-develop"
+        "pickles2/px-fw-2.x": "dev-develop",
+        "phpdocumentor/phpdocumentor": "^2.9"
     },
     "autoload": {
         "files": [

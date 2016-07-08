@@ -8,17 +8,11 @@ pickles2/px2-multitheme
 
 Pickles 2 をセットアップします。
 
-`composer.json` に、`"pickles2/px2-multitheme": "2.*"` を追加します。
+`composer.json` と同階層に移動し、次のコマンドを実行します。
 
 ```
-{
-    "require": {
-        "pickles2/px2-multitheme": "2.*"
-    }
-}
+composer require pickles2/px2-multitheme
 ```
-
-保存したら、 `composer update` を実行して、パッケージをインストールしてください。
 
 次に、`px-files/config.php` に設定を記述します。 デフォルトのテーマを削除して、`px2-multitheme` に変更します。
 
