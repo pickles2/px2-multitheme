@@ -83,7 +83,7 @@ class theme{
 				$tmp_composer_root_dir = false;
 				break;
 			}
-			$tmp_composer_root_dir = dirname($tmp_current_dir);
+			$tmp_composer_root_dir = dirname($tmp_composer_root_dir);
 			continue;
 		}
 		// var_dump( $tmp_composer_root_dir );
