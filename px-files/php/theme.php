@@ -79,11 +79,6 @@ class theme{
 			$this->page['layout'] = 'default';
 		}
 
-		// テーマコレクションを生成する
-		// (廃止予定: publicメソッドに移し、初期化工程では実行しないようにする)
-		$this->theme_collection = $this->mk_theme_collection();
-
-
 		// テーマを選択する
 		$this->auto_select_theme();
 
@@ -117,7 +112,7 @@ class theme{
 		}
 
 		if( strlen( $this->px->req()->get_param($this->param_theme_switch) ) ){
-			if( @is_array( $this->theme_collection[$this->px->req()->get_param($this->param_theme_switch)] ) ){
+			if( $this->theme_id !== $this->px->req()->get_param($this->param_theme_switch) ){
 				$plugin_cache_dir = $this->px->realpath_plugin_files('/');
 				$this->px->fs()->rm($plugin_cache_dir);// ← テーマを切り替える際に、公開キャッシュを一旦削除する
 				$this->theme_id = $this->px->req()->get_param($this->param_theme_switch);
@@ -127,9 +122,6 @@ class theme{
 					$this->px->req()->delete_cookie( $this->cookie_theme_switch );
 				}
 			}
-		}
-		if( @!is_array( $this->theme_collection[$this->theme_id] ) ){
-			$this->theme_id = 'default';
 		}
 
 		return true;
