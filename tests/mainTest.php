@@ -77,6 +77,9 @@ class mainTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals( preg_match( '/'.preg_quote('<p>/index.html</p>', '/').'/', $output ), 1 );
 
 		// /layout_test1.html を実行
+		// ページ /layout_test1.html の layout列には、 test1 がセットされているが、
+		// テーマ standard2 は レイアウト test1 を持っていないので、
+		// default.html が採用されるのが正解。
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/layout_test1.html?THEME=standard2'] );
 		$this->assertEquals( preg_match( '/'.preg_quote('standard2 - default.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_test1.html</p>', '/').'/', $output ), 1 );
@@ -88,7 +91,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 
 	/**
 	 * theme "standard3"
-	 * 存在しないテーマを読み込むテスト
+	 * 存在しないテーマを指定するテスト。デフォルトのテーマが適用されれば正解。
 	 */
 	public function testStandard3(){
 
@@ -96,7 +99,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?THEME=undefined'] );
 
 		// var_dump($output);
-		$this->assertEquals( preg_match( '/'.preg_quote('HOME | Px2-MultiTheme - test - standard', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('standard - default.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area="main">', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
@@ -104,16 +107,79 @@ class mainTest extends PHPUnit_Framework_TestCase{
 
 		// /layout_test1.html を実行
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/layout_test1.html?THEME=undefined'] );
-		$this->assertEquals( preg_match( '/'.preg_quote('TEST1 | Px2-MultiTheme - test - standard', '/').'/', $output ), 1 );
-		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
-		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area="main">', '/').'/', $output ), 1 );
-		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
+		// var_dump($output);
+		$this->assertEquals( preg_match( '/'.preg_quote('standard - test1.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_test1.html</p>', '/').'/', $output ), 1 );
 
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
 	}//testStandard3()
+
+	/**
+	 * theme "not_exists"
+	 * 存在しないテーマを読み込むテスト
+	 */
+	public function testNotExists(){
+
+		// プロジェクト default_not_exists では、
+		//
+		// - data-contents-area-custom
+		// - TEST_THEME_PARAM
+		//
+		// など、設定値が微妙に変更されています。
+
+		// トップページを実行
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/'] );
+
+		// var_dump($output);
+		$this->assertEquals( preg_match( '/'.preg_quote('HOME | Px2-MultiTheme - test - standard', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area-custom="main">', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>/index.html</p>', '/').'/', $output ), 1 );
+
+		// /layout_test1.html を実行
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/layout_test1.html'] );
+		// var_dump($output);
+		$this->assertEquals( preg_match( '/'.preg_quote('TEST1 | Px2-MultiTheme - test - standard', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area-custom="main">', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_test1.html</p>', '/').'/', $output ), 1 );
+
+		// 後始末
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
+
+	}//testNotExists()
+
+	/**
+	 * theme_collection_dir の設定がぜんぜん別の場所を指している場合のテスト
+	 */
+	public function testThemeCollectionDir(){
+
+		// トップページを実行
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?TEST_THEME_PARAM=standard2'] );
+
+		// var_dump($output);
+		$this->assertEquals( preg_match( '/'.preg_quote('standard2 - default.html', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area-custom="main">', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>/index.html</p>', '/').'/', $output ), 1 );
+
+		// /layout_test1.html を実行
+		// ページ /layout_test1.html の layout列には、 test1 がセットされているが、
+		// テーマ standard2 は レイアウト test1 を持っていないので、
+		// default.html が採用されるのが正解。
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/layout_test1.html?TEST_THEME_PARAM=standard2'] );
+		$this->assertEquals( preg_match( '/'.preg_quote('standard2 - default.html', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_test1.html</p>', '/').'/', $output ), 1 );
+
+		// 後始末
+		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
+
+	}//testThemeCollectionDir()
 
 	/**
 	 * 後始末

@@ -113,14 +113,22 @@ class theme{
 
 		$param_theme_id = $this->px->req()->get_param($this->param_theme_switch);
 		if( strlen( $param_theme_id ) && $this->is_valid_theme_id( $param_theme_id ) ){
-			if( $this->theme_id !== $this->px->req()->get_param($this->param_theme_switch) ){
-				$plugin_cache_dir = $this->px->realpath_plugin_files('/');
-				$this->px->fs()->rm($plugin_cache_dir);// ← テーマを切り替える際に、公開キャッシュを一旦削除する
-				$this->theme_id = $this->px->req()->get_param($this->param_theme_switch);
-				$this->px->req()->set_cookie( $this->cookie_theme_switch, $this->theme_id );
+			// GETパラメータに、有効な THEME が入ってたら
 
-				if( $this->theme_id == @$this->conf->default_theme_id ){
-					$this->px->req()->delete_cookie( $this->cookie_theme_switch );
+			if( $this->theme_id !== $param_theme_id ){
+				// 現在選択中のテーマと別のIDだったら
+
+				if( $this->px->fs()->is_dir( $this->conf->path_theme_collection.'/'.$param_theme_id.'/' ) || $this->px->fs()->is_dir( $this->get_composer_root_dir().'/vendor/'.$param_theme_id.'/theme/' ) ){
+					// テーマが実在していたら
+
+					$plugin_cache_dir = $this->px->realpath_plugin_files('/');
+					$this->px->fs()->rm( $plugin_cache_dir );// ← テーマを切り替える際に、公開キャッシュを一旦削除する
+					$this->theme_id = $param_theme_id;
+					$this->px->req()->set_cookie( $this->cookie_theme_switch, $this->theme_id );
+
+					if( $this->theme_id == @$this->conf->default_theme_id ){
+						$this->px->req()->delete_cookie( $this->cookie_theme_switch );
+					}
 				}
 			}
 		}
