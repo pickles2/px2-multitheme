@@ -135,14 +135,19 @@ class theme{
 	 * @return string テーマを実行した結果のHTMLコード
 	 */
 	private function bind( $px ){
-		if( !$px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html' ) ){
+		$path_theme_layout_file = $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
+		if( !$px->fs()->is_file( $path_theme_layout_file ) ){
 			$this->page['layout'] = 'default';
+			$path_theme_layout_file = $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
+		}
+		if( !$px->fs()->is_file( $path_theme_layout_file ) ){
+			$path_theme_layout_file = $this->px->fs()->get_realpath( __DIR__.'/default/default.html' );
 		}
 
 		$theme = $this;
 
 		ob_start();
-		include( $this->path_theme_dir.$this->page['layout'].'.html' );
+		include( $path_theme_layout_file );
 		$src = ob_get_clean();
 		return $src;
 	}

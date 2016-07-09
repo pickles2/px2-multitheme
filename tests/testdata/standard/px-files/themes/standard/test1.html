@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>standard - test1.html</title>
+	</head>
+	<body>
+		<p>test1.html of theme &quot;standard&quot;</p>
+
+		<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by())?>="main">
+<?= $px->bowl()->pull() ?>
+		</div>
+
+	</body>
+</html>
