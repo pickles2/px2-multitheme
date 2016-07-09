@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>standard2 - default.html</title>
-    </head>
-    <body>
-        <p>default.html of theme &quot;standard2&quot;</p>
-<p><?php print ( $theme->get_option('sample_param')=='hoge' ? 'success' : 'FAILED' ); ?></p>
+	<head>
+		<meta charset="utf-8">
+		<title>standard2 - default.html</title>
+	</head>
+	<body>
+		<p>default.html of theme &quot;standard2&quot;</p>
+<p><span><?php print ( $theme->get_option('sample_param')=='hoge' ? 'success' : 'FAILED' ); ?></span></p>
 
-    </body>
+		<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by())?>="main">
+<?= $px->bowl()->pull() ?>
+		</div>
+
+	</body>
 </html>

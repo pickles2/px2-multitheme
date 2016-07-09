@@ -43,7 +43,9 @@ class mainTest extends PHPUnit_Framework_TestCase{
 
 		// var_dump($output);
 		$this->assertEquals( preg_match( '/'.preg_quote('standard - default.html', '/').'/', $output ), 1 );
-		$this->assertEquals( preg_match( '/'.preg_quote('<p>FAILED</p>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area="main">', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
 
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
@@ -60,12 +62,42 @@ class mainTest extends PHPUnit_Framework_TestCase{
 
 		// var_dump($output);
 		$this->assertEquals( preg_match( '/'.preg_quote('standard2 - default.html', '/').'/', $output ), 1 );
-		$this->assertEquals( preg_match( '/'.preg_quote('<p>FAILED</p>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area="main">', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>これはコンテンツファイル。</p>', '/').'/', $output ), 1 );
 
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
 	}//testStandard2()
+
+	/**
+	 * theme "standard3"
+	 * 存在しないテーマを読み込むテスト
+	 */
+	public function testStandard3(){
+
+		// トップページを実行
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?THEME=undefined'] );
+
+		// var_dump($output);
+		$this->assertEquals( preg_match( '/'.preg_quote('standard3 - default.html', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
+
+		// 後始末
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
+
+	}//testStandard3()
+
+	/**
+	 * 後始末
+	 */
+	public function testFinal(){
+
+		// 後始末
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
+
+	}//testFinal()
 
 
 

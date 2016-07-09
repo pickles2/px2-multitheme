@@ -111,7 +111,8 @@ class theme{
 			$this->theme_id = @$this->px->req()->get_cookie($this->cookie_theme_switch);
 		}
 
-		if( strlen( $this->px->req()->get_param($this->param_theme_switch) ) ){
+		$param_theme_id = $this->px->req()->get_param($this->param_theme_switch);
+		if( strlen( $param_theme_id ) && $this->is_valid_theme_id( $param_theme_id ) ){
 			if( $this->theme_id !== $this->px->req()->get_param($this->param_theme_switch) ){
 				$plugin_cache_dir = $this->px->realpath_plugin_files('/');
 				$this->px->fs()->rm($plugin_cache_dir);// ← テーマを切り替える際に、公開キャッシュを一旦削除する
@@ -129,7 +130,9 @@ class theme{
 
 	/**
 	 * bind content to theme
+	 *
 	 * @param object $px Picklesオブジェクト
+	 * @return string テーマを実行した結果のHTMLコード
 	 */
 	private function bind( $px ){
 		if( !$px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html' ) ){
@@ -148,6 +151,7 @@ class theme{
 	 * テーマごとのオプションを取得する
 	 *
 	 * コンフィグオプションに指定されたテーマ別設定の値を取り出します。
+	 *
 	 * @param string $key 取り出したいオプションのキー
 	 */
 	public function get_option($key){
@@ -183,6 +187,7 @@ class theme{
 	 *
 	 * テーマコレクションディレクトリおよびvendorディレクトリを検索し、
 	 * 選択可能なテーマの一覧を生成します。
+	 *
 	 * @return array テーマコレクション
 	 */
 	public function mk_theme_collection(){
@@ -218,6 +223,22 @@ class theme{
 		// var_dump($collection);
 
 		return $collection;
+	}
+
+	/**
+	 * テーマIDとして有効な文字列か検証する
+	 *
+	 * @param string $theme_id 検証対象のテーマID
+	 * @return bool 有効なら true, 無効なら false
+	 */
+	public function is_valid_theme_id( $theme_id ){
+		if( preg_match('/[^a-zA-Z0-9\/\.\-\_]/', $theme_id) ){ return false; }
+		if( preg_match('/(?:^|\/)[\.]{1,2}(?:$|\/)/', $theme_id) ){ return false; }
+		if( preg_match('/^\//', $theme_id) ){ return false; }
+		if( preg_match('/\/$/', $theme_id) ){ return false; }
+		if( preg_match('/\/\//', $theme_id) ){ return false; }
+
+		return true;
 	}
 
 	/**

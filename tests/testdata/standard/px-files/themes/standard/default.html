@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>standard - default.html</title>
-    </head>
-    <body>
-        <p>default.html of theme &quot;standard&quot;</p>
-<p><?php print ( $theme->get_option('sample_param')==null ? 'success' : 'FAILED' ); ?></p>
+	<head>
+		<meta charset="utf-8">
+		<title>standard - default.html</title>
+	</head>
+	<body>
+		<p>default.html of theme &quot;standard&quot;</p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->get_option('sample_param')==null ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('sample_param') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('vndr/pkg') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('vndr/pkg/sub') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('vndr.dir/pkg.pkg') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('vndr..dir/pkg..pkg') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('vndr...dir/pkg...pkg') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('.vndr...dir./.pkg...pkg.') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('..vndr...dir../..pkg...pkg..') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('...vndr...dir../..pkg...pkg...') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('/...vndr...dir../..pkg...pkg...') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('...vndr...dir../..pkg...pkg.../') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa//bbb') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('../..') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('./.') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa/.') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa/..') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('./aaa') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('../aaa') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('aaa/.../bbb') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa/../bbb') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa/./bbb') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('aaa'."\n".'bbb') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a%b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a!b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a@b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a#b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a$b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a%b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a^b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a&b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a*b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a(b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a)b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a{b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a}b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a[b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a]b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a\\b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a|b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a~b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a`b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a:b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a;b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a\'b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a"b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a<b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a>b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a,b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('a.b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( $theme->is_valid_theme_id('a/b') ? 'success' : 'FAILED' ); ?></span></p>
+<p><?= __LINE__; ?>: <span><?php print ( !$theme->is_valid_theme_id('a?b') ? 'success' : 'FAILED' ); ?></span></p>
 
-    </body>
+		<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by())?>="main">
+<?= $px->bowl()->pull() ?>
+		</div>
+
+	</body>
 </html>
