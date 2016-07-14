@@ -5,7 +5,7 @@ return call_user_func( function(){
 	$conf = new stdClass;
 
 	// project
-	$conf->name = 'Px2-MultiTheme'; // サイト名
+	$conf->name = 'Px2-MultiTheme - test - standard'; // サイト名
 	$conf->domain = null; // ドメイン
 	$conf->path_controot = '/'; // コンテンツルートディレクトリ
 
@@ -109,13 +109,13 @@ return call_user_func( function(){
 
 		// テーマ
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode(array(
-			'param_theme_switch'=>'THEME',
-			'cookie_theme_switch'=>'THEME',
-			'path_theme_collection'=>'./px-files/themes/',
-			'attr_bowl_name_by'=>'data-contents-area',
-			'default_theme_id'=>'pickles2',
+			'param_theme_switch'=>'TEST_THEME_PARAM',
+			'cookie_theme_switch'=>'TEST_THEME_PARAM',
+			'path_theme_collection'=>'../standard/px-files/themes/',
+			'attr_bowl_name_by'=>'data-contents-area-custom',
+			'default_theme_id'=>'not_exists',
 			'options'=>array(
-				'pickles2'=>array(
+				'standard2'=>array(
 					'sample_param'=>'hoge'
 				)
 			)

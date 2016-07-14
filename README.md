@@ -1,5 +1,36 @@
-px2-multitheme
+pickles2/px2-multitheme
 ==============
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Linux</th>
+      <th>Windows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>master</th>
+      <td align="center">
+        <a href="https://travis-ci.org/pickles2/px2-multitheme"><img src="https://secure.travis-ci.org/pickles2/px2-multitheme.svg?branch=master"></a>
+      </td>
+      <td align="center">
+        <a href="https://ci.appveyor.com/project/tomk79/px2-multitheme"><img src="https://ci.appveyor.com/api/projects/status/04h4o82cuavxmkwk/branch/master?svg=true"></a>
+      </td>
+    </tr>
+    <tr>
+      <th>develop</th>
+      <td align="center">
+        <a href="https://travis-ci.org/pickles2/px2-multitheme"><img src="https://secure.travis-ci.org/pickles2/px2-multitheme.svg?branch=develop"></a>
+      </td>
+      <td align="center">
+        <a href="https://ci.appveyor.com/project/tomk79/px2-multitheme"><img src="https://ci.appveyor.com/api/projects/status/04h4o82cuavxmkwk/branch/develop?svg=true"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
 *px2-multitheme* は、複数のテーマを同時に管理する機能を [Pickles2](http://pickles2.pxt.jp/) に追加します。
 
@@ -8,31 +39,23 @@ px2-multitheme
 
 Pickles 2 をセットアップします。
 
-`composer.json` に、`"pickles2/px2-multitheme": "dev-master"` を追加します。
+`composer.json` と同階層に移動し、次のコマンドを実行します。
 
 ```
-{
-    "require": {
-        "pickles2/px2-multitheme": "dev-master"
-    }
-}
+composer require pickles2/px2-multitheme
 ```
-
-保存したら、 `composer update` を実行して、パッケージをインストールしてください。
 
 次に、`px-files/config.php` に設定を記述します。 デフォルトのテーマを削除して、`px2-multitheme` に変更します。
 
 ```
-	$conf->funcs->processor->html = [
-		// テーマ
-		// 'theme'=>'pickles2\themes\pickles\theme::exec' , //←削除
-		'theme'=>'tomk79\pickles2\multitheme\theme::exec' ,
-
-	];
-
+$conf->funcs->processor->html = [
+	// テーマ
+	// 'theme'=>'pickles2\themes\pickles\theme::exec' , //←削除
+	'theme'=>'tomk79\pickles2\multitheme\theme::exec' ,
+];
 ```
 
-## オプション - Options
+## コンフィグオプション - Config Options
 
 ### パラメータ名 - param_theme_switch
 
@@ -62,31 +85,90 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 
 テーマコレクションディレクトリに定義されたテーマを指定する場合は `theme_id` などの様にディレクトリ名を、composerパッケージからテーマを指定する場合は `vendorname/packagename` のように、スラッシュで区切られたパッケージ名を設定します。
 
+### オプション - options
 
-### オプションの実装例
+テーマが個別に定義するオプション値を設定します。
+設定できるオプションはテーマによって異なります。詳しくは各テーマのドキュメントを参照してください。
+
+
+### コンフィグオプションの実装例 - Config Sample
 
 ```
-	$conf->funcs->processor->html = [
-		// テーマ
-		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
-			'param_theme_switch'=>'THEME',
-			'cookie_theme_switch'=>'THEME',
-			'path_theme_collection'=>'./px-files/themes/',
-			'attr_bowl_name_by'=>'data-contents-area',
-			'default_theme_id'=>'pickles2',
-			'options'=>array(
-				'pickles2'=>array( // テーマ pickles2 に対するオプション
-					'sample_param'=>'hoge'
-				)
+$conf->funcs->processor->html = [
+	// テーマ
+	'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
+		'param_theme_switch'=>'THEME',
+		'cookie_theme_switch'=>'THEME',
+		'path_theme_collection'=>'./px-files/themes/',
+		'attr_bowl_name_by'=>'data-contents-area',
+		'default_theme_id'=>'pickles2',
+		'options'=>array(
+			'pickles2'=>array( // テーマ pickles2 に対するオプション
+				'sample_param'=>'hoge' // テーマ側からは、 `$theme->get_option('sample_param')` で受け取ることができます。
 			)
-		]).')' ,
-
-	];
+		)
+	]).')'
+];
 
 ```
 
 
-### テーマパッケージの開発
+## テーマの実装
+
+各テーマは、テーマコレクションディレクトリの直下にディレクトリとして設置します。 例えば、 `sample` という名前のテーマは、 ディレクトリ `<theme_collection_dir>/sample/` の中に実装されます。
+
+テーマディレクトリの直下には、 `(レイアウト名).html` という命名規則で、複数のレイアウトを定義できます。
+
+規定のレイアウトは、 `default.html` (=デフォルト), `popup.html`, `top.html`, `plain.html`, `naked.html` があり、 サイトマップCSV の `layout` 列に名前を指定して選択します。この使い方については、Pickles 2 のドキュメントを参照してください。
+
+### テーマレイアウトで使える主なAPI
+
+#### Pickles 2 の API
+
+Pickles 2 が提供するAPIのうち、テーマの実装でよく利用するAPIには、次のものがあります。 詳しい使い方は、Pickles 2 の [APIドキュメント](http://pickles2.pxt.jp/phpdoc/) を参照してください。
+
+- `$px->href()`
+- `$px->mk_link()`
+- `$px->conf()`
+- `$px->bowl()->pull()`
+- `$px->site()->get_current_page_info()`
+- `$px->site()->get_children()`
+- `$px->site()->is_page_in_breadcrumb()`
+- `$px->site()->path_plugin_files()`
+- `$px->site()->get_category_top()`
+
+#### px2-multitheme が提供する API
+
+Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供されます。
+
+- `$theme->get_option()`
+- `$theme->get_layout()`
+- `$theme->get_attr_bowl_name_by()`
+- `$theme->mk_global_menu()`
+- `$theme->mk_shoulder_menu()`
+- `$theme->mk_sub_menu()`
+- `$theme->mk_megafooter_menu()`
+- `$theme->mk_breadcrumb()`
+
+
+### theme_files
+
+テーマフォルダの直下に ディレクトリ `theme_files/` を設置すると、ここにテーマ固有のリソースファイル(画像やCSSなど)を置くことができます。
+
+`theme_files` に置かれたファイルは、 Pickles 2 の公開キャッシュディレクトリ(デフォルトでは `/caches/*`) の中に複製が作られ、ブラウザから参照できるようになります。
+
+テーマからこれらのファイルを呼び出す場合、次のように実装してください。
+
+```php
+<p>'theme_files/hoge/fuga.png' を呼び出す</p>
+<img src="<?= htmlspecialchars( $px->path_plugin_files('/hoge/fuga.png') ); ?>" alt="" />
+```
+
+
+
+## テーマパッケージの公開
+
+テーマは、独立したパッケージとして Packagist などで公開できます。
 
 `/theme/default.html` に、デフォルトのレイアウトをセットしてください。 `/theme/` 以下の構成は、テーマコレクションと同じです。
 
@@ -98,7 +180,7 @@ MIT License
 
 ## 作者 - Author
 
-- (C)Tomoya Koyanagi <tomk79@gmail.com>
+- Tomoya Koyanagi <tomk79@gmail.com>
 - website: <http://www.pxt.jp/>
 - Twitter: @tomk79 <http://twitter.com/tomk79/>
 
