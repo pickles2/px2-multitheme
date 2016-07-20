@@ -417,7 +417,13 @@ class theme{
 		$rtn = '';
 		$rtn .= '<ul>';
 		foreach( $breadcrumb as $pid ){
-			$rtn .= '<li>'.$this->px->mk_link( $pid, array('label'=>$this->px->site()->get_page_info($pid, 'title_breadcrumb'), 'current'=>false) ).'</li>';
+			$rtn .= '<li>';
+			if( $this->px->href($pid) != $this->px->href($this->px->site()->get_current_page_info('id')) ){
+				$rtn .= $this->px->mk_link( $pid, array('label'=>$this->px->site()->get_page_info($pid, 'title_breadcrumb'), 'current'=>false) );
+			}else{
+				$rtn .= '<span>'.htmlspecialchars( $this->px->site()->get_page_info($pid, 'title_breadcrumb') ).'</span>';
+			}
+			$rtn .= '</li>';
 		}
 		$rtn .= '<li><span>'.htmlspecialchars( $this->px->site()->get_current_page_info('title_breadcrumb') ).'</span></li>';
 		$rtn .= '</ul>';
