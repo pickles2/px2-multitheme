@@ -175,6 +175,10 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
+### px2-multitheme 2.0.3 (2016年??月??日)
+
+- `<?= htmlspecialchars($theme->get_attr_bowl_name_by())?>` の代わりに、 固定文字列 `data-pickles2-bowl-name` と書けるようになった。
+
 ### px2-multitheme 2.0.2 (2016年7月27日)
 
 - パンくず上にカレントページがある場合に、リンクではなくなるようになった。

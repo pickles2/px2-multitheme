@@ -13,7 +13,7 @@
 	<body>
 
 		<h1><?= preg_replace('/\r\n|\r|\n/s', '<br />', htmlspecialchars($px->site()->get_current_page_info( 'title_h1' )) ); ?></h1>
-		<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by())?>="main">
+		<div class="contents" data-pickles2-bowl-name="main">
 <?= $px->bowl()->pull() ?>
 		</div>
 

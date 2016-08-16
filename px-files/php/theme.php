@@ -20,6 +20,10 @@ class theme{
 	private $cookie_theme_switch = 'THEME';
 	/** 選択されるテーマID */
 	private $theme_id = 'default';
+	/** 置換する文字列 */
+	private $replace = array(
+		'data-pickles2-bowl-name' => 'data-contents-area' // bowl名を示す属性名
+	);
 	/** テーマコレクション */
 	private $theme_collection;
 	/** テーマのコンフィグオプション */
@@ -61,6 +65,7 @@ class theme{
 		if( strlen(@$options->attr_bowl_name_by) ){
 			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
 		}
+		$this->replace['data-pickles2-bowl-name'] = $this->conf->attr_bowl_name_by;
 		if( strlen(@$options->param_theme_switch) ){
 			$this->param_theme_switch = $options->param_theme_switch;
 		}
@@ -157,6 +162,9 @@ class theme{
 		ob_start();
 		include( $path_theme_layout_file );
 		$src = ob_get_clean();
+		foreach( $this->replace as $before => $after ){
+			$src = str_replace( $before, $after, $src );
+		}
 		return $src;
 	}
 
