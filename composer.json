@@ -32,7 +32,8 @@
     },
     "autoload": {
         "files": [
-            "px-files/php/theme.php"
+            "px-files/php/theme.php",
+            "px-files/php/template_utility.php"
         ]
     }
 }
