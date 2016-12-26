@@ -36,6 +36,68 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * theme "standard"
 	 */
+	public function testValidThemeId(){
+		$px = new picklesFramework2\px(__DIR__.'/testdata/standard/px-files/');
+		$multitheme = new \tomk79\pickles2\multitheme\theme($px);
+
+		$this->assertTrue( $multitheme->is_valid_theme_id('sample_param') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr/pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr/pkg/sub') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr.dir/pkg.pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr..dir/pkg..pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr...dir/pkg...pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('.vndr...dir./.pkg...pkg.') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('..vndr...dir../..pkg...pkg..') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('...vndr...dir../..pkg...pkg...') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('/...vndr...dir../..pkg...pkg...') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('...vndr...dir../..pkg...pkg.../') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa//bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('../..') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('./.') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/.') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/..') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('./aaa') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('../aaa') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('aaa/.../bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/../bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/./bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa'."\n".'bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a%b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a!b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a@b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a#b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a$b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a%b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a^b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a&b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a*b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a(b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a)b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a{b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a}b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a[b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a]b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a\\b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a|b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a~b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a`b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a:b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a;b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a\'b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a"b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a<b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a>b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a,b') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('a.b') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('a/b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a?b') );
+
+	}//testValidThemeId()
+
+
+	/**
+	 * theme "standard"
+	 */
 	public function testStandard(){
 
 		// トップページを実行
