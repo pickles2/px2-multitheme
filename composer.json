@@ -35,5 +35,11 @@
             "px-files/php/theme.php",
             "px-files/php/template_utility.php"
         ]
+    },
+    "extra": {
+        "px2package": {
+            "name": "pickles2/px2-multitheme",
+            "type": "processor"
+        }
     }
 }
