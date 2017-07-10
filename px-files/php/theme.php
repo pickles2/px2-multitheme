@@ -84,10 +84,46 @@ class theme{
 
 
 		// テーマディレクトリを決定する
-		$this->path_theme_dir = $this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$this->theme_id.'/' );
-		if( !is_dir($this->path_theme_dir) ){
-			$this->path_theme_dir = $this->px->fs()->get_realpath( $this->get_composer_root_dir().'/vendor/'.$this->theme_id.'/theme/' );
+		$path_composer_root_dir = $this->get_composer_root_dir();
+		preg_match('/^([a-zA-Z0-9\_\-\.]*)(?:\/([a-zA-Z0-9\_\-\.]*))?(?:\@([0-9]*?))?$/', $this->theme_id, $matched);
+		$theme_id_1 = @$matched[1];
+		$theme_id_2 = @$matched[2];
+		$theme_id_num = @$matched[3];
+
+		if( !strlen($this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
+			// 自身の composer.json を探す
+			$composer_json = @$this->px->fs()->read_file($path_composer_root_dir.'/composer.json');
+			$composer_json = @json_decode($composer_json);
+			if( !strlen($this->theme_id) && $composer_json->extra->px2package->type == 'theme' ){
+				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package->path );
+			}elseif( $this->theme_id == '@'.$theme_id_num && $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
+				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package[$theme_id_num]->path );
+			}
 		}
+		if( !is_dir($this->path_theme_dir) && $theme_id_1 == $this->theme_id ){
+			// テーマコレクションを探す
+			$this->path_theme_dir = $this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$this->theme_id.'/' );
+		}
+		if( !is_dir($this->path_theme_dir) ){
+			// vendor内の composer.json を探す
+			if( is_dir($path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2.'/') ){
+				$tmp_composer_pkg_root = $path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2;
+				$composer_json = @$this->px->fs()->read_file($tmp_composer_pkg_root.'/composer.json');
+				$composer_json = @json_decode($composer_json);
+				if( $composer_json->extra->px2package->type == 'theme' ){
+					$this->path_theme_dir = $this->px->fs()->get_realpath( $tmp_composer_pkg_root.'/'.$composer_json->extra->px2package->path );
+				}elseif( $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
+					$this->path_theme_dir = $this->px->fs()->get_realpath( $tmp_composer_pkg_root.'/'.$composer_json->extra->px2package[$theme_id_num]->path );
+				}
+				unset($tmp_composer_pkg_root);
+			}
+		}
+		if( !is_dir($this->path_theme_dir) ){
+			// vendor内の themeフォルダ を探す
+			$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/vendor/'.$this->theme_id.'/theme/' );
+		}
+		unset($theme_id_1, $theme_id_2, $theme_id_num);
+
 
 		// テーマのリソースファイルをキャッシュに複製する
 		if( is_dir($this->path_theme_dir.'/theme_files/') ){
@@ -206,15 +242,6 @@ class theme{
 	public function mk_theme_collection(){
 		$collection = array();
 
-		// テーマコレクションを作成
-		foreach( $this->px->fs()->ls( $this->conf->path_theme_collection ) as $theme_id ){
-			$collection[$theme_id] = [
-				'id'=>$theme_id,
-				'path'=>$this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$theme_id.'/' ),
-				'type'=>'collection'
-			];
-		}
-
 		// vendorディレクトリ内から検索
 		$tmp_composer_root_dir = $this->get_composer_root_dir();
 		// var_dump( $tmp_composer_root_dir );
@@ -223,6 +250,8 @@ class theme{
 			foreach( $this->px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
 				if( !$this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) ){ continue; }
 				foreach( $this->px->fs()->ls( $tmp_composer_root_dir.'/vendor/'.$vendor_id ) as $package_id ){
+
+					// themeディレクトリがある場合 (旧方式)
 					if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ) ){
 						$collection[$vendor_id.'/'.$package_id] = [
 							'id'=>$vendor_id.'/'.$package_id,
@@ -230,11 +259,69 @@ class theme{
 							'type'=>'vendor'
 						];
 					}
+
+					// px2package に theme が定義されている場合
+					if( $this->px->fs()->is_file( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/composer.json' ) ){
+						$composer_json = $this->px->fs()->read_file( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/composer.json' );
+						$composer_json = @json_decode($composer_json);
+						if( @is_array($composer_json->extra->px2package) ){
+							foreach( $composer_json->extra->px2package as $package_idx=>$package ){
+								if( @$package->type == 'theme' ){
+									$collection[$vendor_id.'/'.$package_id.'@'.$package_idx] = [
+										'id'=>$vendor_id.'/'.$package_id.'@'.$package_idx,
+										'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$package->path ),
+										'type'=>'vendor'
+									];
+								}
+							}
+						}elseif( @$composer_json->extra->px2package->type == 'theme' ){
+							$collection[$vendor_id.'/'.$package_id] = [
+								'id'=>$vendor_id.'/'.$package_id,
+								'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$composer_json->extra->px2package->path ),
+								'type'=>'vendor'
+							];
+						}
+					}
+
 				}
 			}
 		}
-		// var_dump($collection);
 
+		// テーマコレクションを作成
+		// (vendor内よりも優先)
+		foreach( $this->px->fs()->ls( $this->conf->path_theme_collection ) as $theme_id ){
+			$collection[$theme_id] = [
+				'id'=>$theme_id,
+				'path'=>$this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$theme_id.'/' ),
+				'type'=>'collection'
+			];
+		}
+
+		// 自身の composer.json から作成
+		// (最優先)
+		if( $this->px->fs()->is_file( $tmp_composer_root_dir.'/composer.json' ) ){
+			$composer_json = $this->px->fs()->read_file( $tmp_composer_root_dir.'/composer.json' );
+			$composer_json = @json_decode($composer_json);
+			if( @is_array($composer_json->extra->px2package) ){
+				foreach( $composer_json->extra->px2package as $package_idx=>$package ){
+					if( @$package->type == 'theme' ){
+						$collection['@'.$package_idx] = [
+							'id'=>'@'.$package_idx,
+							'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$package->path ),
+							'type'=>'vendor'
+						];
+					}
+				}
+			}elseif( @$composer_json->extra->px2package->type == 'theme' ){
+				$collection[''] = [
+					'id'=>'',
+					'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$composer_json->extra->px2package->path ),
+					'type'=>'vendor'
+				];
+			}
+		}
+
+		// var_dump($collection);
 		return $collection;
 	}
 

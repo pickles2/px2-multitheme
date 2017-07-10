@@ -262,6 +262,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	 * @return string コマンドの標準出力値
 	 */
 	private function passthru( $ary_command ){
+		set_time_limit(180); // Windowsのtestがタイム・アウトするため追加
 		$cmd = array();
 		foreach( $ary_command as $row ){
 			$param = '"'.addslashes($row).'"';
