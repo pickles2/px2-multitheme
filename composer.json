@@ -1,7 +1,7 @@
 {
     "name": "pickles2/px2-multitheme",
     "description": "px2-multitheme は、複数のテーマを同時に管理する機能を Pickles 2 に追加します。",
-    "keywords": ["pickles"],
+    "keywords": ["pickles2"],
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +14,7 @@
             "php ./vendor/phpunit/phpunit/phpunit"
         ],
         "documentation": [
-            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
+            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.0.3 API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
         ]
     } ,
     "repositories": [
