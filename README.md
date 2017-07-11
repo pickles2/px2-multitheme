@@ -144,6 +144,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 - `$theme->get_option()`
 - `$theme->get_layout()`
 - `$theme->get_attr_bowl_name_by()`
+- `$theme->files()`
 - `$theme->mk_global_menu()`
 - `$theme->mk_shoulder_menu()`
 - `$theme->mk_sub_menu()`
@@ -161,7 +162,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ```php
 <p>'theme_files/hoge/fuga.png' を呼び出す</p>
-<img src="<?= htmlspecialchars( $px->path_plugin_files('/hoge/fuga.png') ); ?>" alt="" />
+<img src="<?= htmlspecialchars( $theme->files('/hoge/fuga.png') ); ?>" alt="" />
 ```
 
 
@@ -175,23 +176,23 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### px2-multitheme 2.0.3 (2016年??月??日)
+### pickles2/px2-multitheme 2.0.3 (2017年7月11日)
 
 - テーマテンプレートの実装を助ける目的ではないメソッドを `$theme` から分離して隠蔽した。
 - `$theme->files()` を追加。
 - `px2package` を参照してテーマを検索するようになった。
 
-### px2-multitheme 2.0.2 (2016年7月27日)
+### pickles2/px2-multitheme 2.0.2 (2016年7月27日)
 
 - パンくず上にカレントページがある場合に、リンクではなくなるようになった。
 - 誤ったテーマIDを選択した場合に、仮のテーマに包んで画面を返すようになった。
 - その他、不具合の修正とパフォーマンス向上。
 
-### px2-multitheme 2.0.1 (2016年6月30日)
+### pickles2/px2-multitheme 2.0.1 (2016年6月30日)
 
 - ローカルナビゲーションの生成ルールを変更： パンくず上にないページの子要素は開かないようにした。
 
-### px2-multitheme 2.0.0 (2016年3月4日)
+### pickles2/px2-multitheme 2.0.0 (2016年3月4日)
 
 - 初版リリース。
 
