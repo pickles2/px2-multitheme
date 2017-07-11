@@ -60,6 +60,7 @@ return call_user_func( function(){
 		'*/.svn/*' => 'ignore' ,
 		'*/.git/*' => 'ignore' ,
 		'*/.gitignore' => 'ignore' ,
+		'/tests/*' => 'ignore' ,
 
 		'*.html' => 'html' ,
 		'*.htm' => 'html' ,

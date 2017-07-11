@@ -211,5 +211,14 @@ class template_utility{
 		return $rtn;
 	}
 
+	/**
+	 * テーマリソースへのパスを取得する
+	 * @param  string $path_resource `theme_files` をルートとしたリソースのパス
+	 * @return string リソースへの実際のパス
+	 */
+	public function files($path_resource){
+		return $this->px->path_plugin_files($path_resource);
+	}
+
 }
 
