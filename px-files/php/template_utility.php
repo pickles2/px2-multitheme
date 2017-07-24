@@ -217,7 +217,8 @@ class template_utility{
 	 * @return string リソースへの実際のパス
 	 */
 	public function files($path_resource){
-		return $this->px->path_plugin_files($path_resource);
+		$path = $this->px->fs()->get_realpath('/'.urlencode($this->multitheme->get_theme_id()).'/'.$path_resource);
+		return $this->px->path_plugin_files($path);
 	}
 
 }
