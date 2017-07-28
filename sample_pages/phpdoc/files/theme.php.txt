@@ -129,7 +129,7 @@ class theme{
 		if( is_dir($this->path_theme_dir.'/theme_files/') ){
 			$this->px->fs()->copy_r(
 				$this->path_theme_dir.'/theme_files/' ,
-				$this->px->realpath_plugin_files('/')
+				$this->px->realpath_plugin_files('/'.urlencode($this->theme_id).'/')
 			);
 		}
 	} // __construct()
@@ -157,8 +157,8 @@ class theme{
 				if( $this->px->fs()->is_dir( $this->conf->path_theme_collection.'/'.$param_theme_id.'/' ) || $this->px->fs()->is_dir( $this->get_composer_root_dir().'/vendor/'.$param_theme_id.'/theme/' ) ){
 					// テーマが実在していたら
 
-					$plugin_cache_dir = $this->px->realpath_plugin_files('/');
-					$this->px->fs()->rm( $plugin_cache_dir );// ← テーマを切り替える際に、公開キャッシュを一旦削除する
+					// $plugin_cache_dir = $this->px->realpath_plugin_files('/');
+					// $this->px->fs()->rm( $plugin_cache_dir );// ← テーマを切り替える際に、公開キャッシュを一旦削除する
 					$this->theme_id = $param_theme_id;
 					$this->px->req()->set_cookie( $this->cookie_theme_switch, $this->theme_id );
 
@@ -350,9 +350,19 @@ class theme{
 	 * レイアウト `hoge.html` を選択したい場合、 layout列には `hoge` と入力します。
 	 *
 	 * layout列が空白の場合、 `default.html` が選択されます。
+	 * @return string レイアウト名
 	 */
 	public function get_layout(){
 		return @$this->page['layout'];
+	}
+
+	/**
+	 * 選択されたテーマIDを取得する
+	 *
+	 * @return string Theme ID
+	 */
+	public function get_theme_id(){
+		return @$this->theme_id;
 	}
 
 	/**
