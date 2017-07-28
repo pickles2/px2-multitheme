@@ -176,7 +176,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### pickles2/px2-multitheme 2.0.4 (20??年??月??日)
+### pickles2/px2-multitheme 2.0.4 (2017年7月28日)
 
 - 異なるテーマで同時アクセスしたときに、リソースのパスが混在する問題を修正。
 
