@@ -192,7 +192,23 @@ class theme{
 
 		ob_start();
 		include( $path_theme_layout_file );
-		$src = ob_get_clean();
+		$tmp_src = ob_get_clean();
+
+		$src = '';
+
+		// `./theme_files/*` で始まるリソースパスを、 `$theme->files()` に通して成立させる処理
+		while(1){
+			if( !preg_match('/^(.*?)([\"\'])(?:\.\/)?theme_files\/(.*?)\2(.*)$/s', $tmp_src, $matched) ){
+				$src .= $tmp_src;
+				break;
+			}
+			$src .= $matched[1];
+			$src .= $matched[2];
+			$src .= $theme->files('/'.$matched[3]);
+			$src .= $matched[2];
+			$tmp_src = $matched[4];
+		}
+
 		return $src;
 	}
 
