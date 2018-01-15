@@ -180,7 +180,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### pickles2/px2-multitheme 2.0.5 (20??年??月??日)
+### pickles2/px2-multitheme 2.0.5 (2018年1月23日)
 
 - 新しい設定項目 `$param_layout_switch` を追加。 GETパラメータで一時的にレイアウトを切り替えて表示できるようになった。
 - `./theme_files/〜〜` という記述でテーマリソースにアクセスできるようになった。 `$theme->files()` が暗黙的に呼ばれ、置き換えられる。
