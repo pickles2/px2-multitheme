@@ -18,6 +18,8 @@ class theme{
 	private $param_theme_switch = 'THEME';
 	/** テーマ名を格納するクッキー名 */
 	private $cookie_theme_switch = 'THEME';
+	/** レイアウトスイッチ名 */
+	private $param_layout_switch = 'LAYOUT';
 	/** 選択されるテーマID */
 	private $theme_id = 'default';
 	/** テーマコレクション */
@@ -66,6 +68,9 @@ class theme{
 		}
 		if( strlen(@$options->cookie_theme_switch) ){
 			$this->cookie_theme_switch = $options->cookie_theme_switch;
+		}
+		if( strlen(@$options->param_layout_switch) ){
+			$this->param_layout_switch = $options->param_layout_switch;
 		}
 
 		$this->theme_options = (@$options->options ? $options->options : new \stdClass());
@@ -173,20 +178,49 @@ class theme{
 	}
 
 	/**
+	 * レイアウトを選択し、ファイルのパスを取得する
+	 *
+	 * 1. まず、パラメータ LAYOUT が指定されていて、かつレイアウトファイルが存在したら それが最優先。
+	 * 2. 次に、ページに layout 列が指定されていて、かつレイアウトファイルが存在したら それを採用。
+	 * 3. 次に、固定文字列 'default' でレイアウトファイルを探し、存在したらそれを採用。
+	 * 4. どれも該当がなければ、 固定レイアウト './default/default.html' を採用する。
+	 *
+	 * @return string レイアウトファイルのパス
+	 */
+	private function find_layout_realpath(){
+
+		// 1. パラメータに指定された LAYOUT を探す
+		$param_layout_switch = $this->px->req()->get_param($this->param_layout_switch);
+		if( strlen($this->param_layout_switch) && strlen($param_layout_switch) ){
+			if( $this->px->fs()->is_file($this->path_theme_dir.$param_layout_switch.'.html') ){
+				$this->page['layout'] = $param_layout_switch;
+				return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
+			}
+		}
+
+		// 2. ページに指定された layout を探す
+		if( $this->px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html' ) ){
+			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
+		}
+
+		// 3. 固定文字列 'default' で探す
+		if( $this->px->fs()->is_file( $this->path_theme_dir.'default'.'.html' ) ){
+			$this->page['layout'] = 'default';
+			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
+		}
+
+		// 4. 固定レイアウトを返す
+		return $this->px->fs()->get_realpath( __DIR__.'/default/default.html' );
+	}
+
+	/**
 	 * bind content to theme
 	 *
 	 * @param object $px Picklesオブジェクト
 	 * @return string テーマを実行した結果のHTMLコード
 	 */
 	private function bind( $px ){
-		$path_theme_layout_file = $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
-		if( !$px->fs()->is_file( $path_theme_layout_file ) ){
-			$this->page['layout'] = 'default';
-			$path_theme_layout_file = $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
-		}
-		if( !$px->fs()->is_file( $path_theme_layout_file ) ){
-			$path_theme_layout_file = $this->px->fs()->get_realpath( __DIR__.'/default/default.html' );
-		}
+		$path_theme_layout_file = $this->find_layout_realpath();
 
 		$theme = new template_utility( $px, $this );
 
@@ -218,6 +252,7 @@ class theme{
 	 * コンフィグオプションに指定されたテーマ別設定の値を取り出します。
 	 *
 	 * @param string $key 取り出したいオプションのキー
+	 * @return mixed テーマのオプション
 	 */
 	public function get_option($key){
 		return @$this->theme_options[$this->theme_id][$key];
@@ -271,7 +306,7 @@ class theme{
 					if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ) ){
 						$collection[$vendor_id.'/'.$package_id] = [
 							'id'=>$vendor_id.'/'.$package_id,
-							'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ),
+							'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/theme/' ),
 							'type'=>'vendor'
 						];
 					}
@@ -285,7 +320,7 @@ class theme{
 								if( @$package->type == 'theme' ){
 									$collection[$vendor_id.'/'.$package_id.'@'.$package_idx] = [
 										'id'=>$vendor_id.'/'.$package_id.'@'.$package_idx,
-										'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$package->path ),
+										'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$package->path ),
 										'type'=>'vendor'
 									];
 								}
@@ -293,7 +328,7 @@ class theme{
 						}elseif( @$composer_json->extra->px2package->type == 'theme' ){
 							$collection[$vendor_id.'/'.$package_id] = [
 								'id'=>$vendor_id.'/'.$package_id,
-								'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$composer_json->extra->px2package->path ),
+								'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$composer_json->extra->px2package->path ),
 								'type'=>'vendor'
 							];
 						}
@@ -323,7 +358,7 @@ class theme{
 					if( @$package->type == 'theme' ){
 						$collection['@'.$package_idx] = [
 							'id'=>'@'.$package_idx,
-							'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$package->path ),
+							'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$package->path ),
 							'type'=>'vendor'
 						];
 					}
@@ -331,7 +366,7 @@ class theme{
 			}elseif( @$composer_json->extra->px2package->type == 'theme' ){
 				$collection[''] = [
 					'id'=>'',
-					'path'=>$px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$composer_json->extra->px2package->path ),
+					'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$composer_json->extra->px2package->path ),
 					'type'=>'vendor'
 				];
 			}

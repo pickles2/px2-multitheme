@@ -41,29 +41,32 @@ Pickles 2 をセットアップします。
 
 `composer.json` と同階層に移動し、次のコマンドを実行します。
 
-```
+```php
 composer require pickles2/px2-multitheme
 ```
 
-次に、`px-files/config.php` に設定を記述します。 デフォルトのテーマを削除して、`px2-multitheme` に変更します。
+次に、`px-files/config.php` に設定を記述します。
 
-```
+```php
 $conf->funcs->processor->html = [
 	// テーマ
-	// 'theme'=>'pickles2\themes\pickles\theme::exec' , //←削除
 	'theme'=>'tomk79\pickles2\multitheme\theme::exec' ,
 ];
 ```
 
 ## コンフィグオプション - Config Options
 
-### パラメータ名 - param_theme_switch
+### テーマ切り替えのパラメータ名 - param_theme_switch
 
 テーマ切り替えスイッチとして使用するGETパラメータ名を設定します。デフォルトは `THEME` です。
 
-### クッキー名 -  cookie_theme_switch
+### テーマ名を記憶するクッキー名 -  cookie_theme_switch
 
 切り替えたテーマ名を記憶するクッキー名を設定します。デフォルトは `THEME` です。
+
+### レイアウト切り替えのパラメータ名 - param_layout_switch
+
+レイアウト切り替えスイッチとして使用するGETパラメータ名を設定します。デフォルトは `LAYOUT` です。
 
 ### テーマコレクションディレクトリ - path_theme_collection
 
@@ -99,6 +102,7 @@ $conf->funcs->processor->html = [
 	'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
 		'param_theme_switch'=>'THEME',
 		'cookie_theme_switch'=>'THEME',
+		'param_layout_switch'=>'LAYOUT',
 		'path_theme_collection'=>'./px-files/themes/',
 		'attr_bowl_name_by'=>'data-contents-area',
 		'default_theme_id'=>'pickles2',
@@ -176,8 +180,9 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### pickles2/px2-multitheme 2.0.5 (20??年??月??日)
+### pickles2/px2-multitheme 2.0.5 (2018年1月23日)
 
+- 新しい設定項目 `$param_layout_switch` を追加。 GETパラメータで一時的にレイアウトを切り替えて表示できるようになった。
 - `./theme_files/〜〜` という記述でテーマリソースにアクセスできるようになった。 `$theme->files()` が暗黙的に呼ばれ、置き換えられる。
 
 ### pickles2/px2-multitheme 2.0.4 (2017年7月28日)
