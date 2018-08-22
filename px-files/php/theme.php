@@ -48,6 +48,9 @@ class theme{
 	 */
 	public function __construct($px, $options = null){
 		$this->px = $px;
+		if( !is_object($options) ){
+			$options = new \stdClass();
+		}
 
 		$this->conf = new \stdClass();
 		$this->conf->path_theme_collection = $this->px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;

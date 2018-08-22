@@ -41,7 +41,7 @@ Pickles 2 をセットアップします。
 
 `composer.json` と同階層に移動し、次のコマンドを実行します。
 
-```php
+```
 composer require pickles2/px2-multitheme
 ```
 
@@ -96,7 +96,7 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 
 ### コンフィグオプションの実装例 - Config Sample
 
-```
+```php
 $conf->funcs->processor->html = [
 	// テーマ
 	'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
@@ -182,7 +182,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ### pickles2/px2-multitheme 2.0.6 (リリース日未定)
 
-- その他の細かい不具合の修正。
+- 細かい不具合の修正。
 
 ### pickles2/px2-multitheme 2.0.5 (2018年1月24日)
 
