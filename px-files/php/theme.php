@@ -51,29 +51,29 @@ class theme{
 
 		$this->conf = new \stdClass();
 		$this->conf->path_theme_collection = $this->px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
-		if( strlen(@$options->path_theme_collection) ){
+		if( property_exists($options, 'path_theme_collection') && strlen(@$options->path_theme_collection) ){
 			$this->conf->path_theme_collection = $this->px->fs()->get_realpath($options->path_theme_collection.DIRECTORY_SEPARATOR);
 		}
 		$this->conf->default_theme_id = 'default';
 
-		if( strlen(@$options->default_theme_id) ){
+		if( property_exists($options, 'default_theme_id') && strlen(@$options->default_theme_id) ){
 			$this->conf->default_theme_id = $options->default_theme_id;
 		}
 		$this->conf->attr_bowl_name_by = 'data-contents-area';
-		if( strlen(@$options->attr_bowl_name_by) ){
+		if( property_exists($options, 'attr_bowl_name_by') && strlen(@$options->attr_bowl_name_by) ){
 			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
 		}
-		if( strlen(@$options->param_theme_switch) ){
+		if( property_exists($options, 'param_theme_switch') && strlen(@$options->param_theme_switch) ){
 			$this->param_theme_switch = $options->param_theme_switch;
 		}
-		if( strlen(@$options->cookie_theme_switch) ){
+		if( property_exists($options, 'cookie_theme_switch') && strlen(@$options->cookie_theme_switch) ){
 			$this->cookie_theme_switch = $options->cookie_theme_switch;
 		}
-		if( strlen(@$options->param_layout_switch) ){
+		if( property_exists($options, 'param_layout_switch') && strlen(@$options->param_layout_switch) ){
 			$this->param_layout_switch = $options->param_layout_switch;
 		}
 
-		$this->theme_options = (@$options->options ? $options->options : new \stdClass());
+		$this->theme_options = (property_exists($options, 'options') ? $options->options : new \stdClass());
 		$this->theme_options = json_decode( json_encode($this->theme_options), true );
 		// var_dump($this->theme_options);
 

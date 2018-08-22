@@ -180,9 +180,9 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### pickles2/px2-multitheme 2.0.6 (未定)
+### pickles2/px2-multitheme 2.0.6 (リリース日未定)
 
-- ?????????????????????
+- その他の細かい不具合の修正。
 
 ### pickles2/px2-multitheme 2.0.5 (2018年1月24日)
 
