@@ -91,9 +91,18 @@ class theme{
 		// テーマディレクトリを決定する
 		$path_composer_root_dir = $this->get_composer_root_dir();
 		preg_match('/^([a-zA-Z0-9\_\-\.]*)(?:\/([a-zA-Z0-9\_\-\.]*))?(?:\@([0-9]*?))?$/', $this->theme_id, $matched);
-		$theme_id_1 = @$matched[1];
-		$theme_id_2 = @$matched[2];
-		$theme_id_num = @$matched[3];
+		$theme_id_1 = null;
+		if( array_key_exists(1, $matched) ){
+			$theme_id_1 = @$matched[1];
+		}
+		$theme_id_2 = null;
+		if( array_key_exists(2, $matched) ){
+			$theme_id_2 = @$matched[2];
+		}
+		$theme_id_num = null;
+		if( array_key_exists(3, $matched) ){
+			$theme_id_num = @$matched[3];
+		}
 
 		if( !strlen($this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
 			// 自身の composer.json を探す
