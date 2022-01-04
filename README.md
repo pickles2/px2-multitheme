@@ -180,41 +180,41 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### pickles2/px2-multitheme 2.1.0 (リリース日未定)
+### pickles2/px2-multitheme v2.1.0 (リリース日未定)
 
 - サポートするPHPのバージョンを `>=7.3.0` に変更。
 - PHP 8.1 に対応した。
 
-### pickles2/px2-multitheme 2.0.6 (2018年8月30日)
+### pickles2/px2-multitheme v2.0.6 (2018年8月30日)
 
 - 細かい不具合の修正。
 
-### pickles2/px2-multitheme 2.0.5 (2018年1月24日)
+### pickles2/px2-multitheme v2.0.5 (2018年1月24日)
 
 - 新しい設定項目 `$param_layout_switch` を追加。 GETパラメータで一時的にレイアウトを切り替えて表示できるようになった。
 - `./theme_files/〜〜` という記述でテーマリソースにアクセスできるようになった。 `$theme->files()` が暗黙的に呼ばれ、置き換えられる。
 
-### pickles2/px2-multitheme 2.0.4 (2017年7月28日)
+### pickles2/px2-multitheme v2.0.4 (2017年7月28日)
 
 - 異なるテーマで同時アクセスしたときに、リソースのパスが混在する問題を修正。
 
-### pickles2/px2-multitheme 2.0.3 (2017年7月11日)
+### pickles2/px2-multitheme v2.0.3 (2017年7月11日)
 
 - テーマテンプレートの実装を助ける目的ではないメソッドを `$theme` から分離して隠蔽した。
 - `$theme->files()` を追加。
 - `px2package` を参照してテーマを検索するようになった。
 
-### pickles2/px2-multitheme 2.0.2 (2016年7月27日)
+### pickles2/px2-multitheme v2.0.2 (2016年7月27日)
 
 - パンくず上にカレントページがある場合に、リンクではなくなるようになった。
 - 誤ったテーマIDを選択した場合に、仮のテーマに包んで画面を返すようになった。
 - その他、不具合の修正とパフォーマンス向上。
 
-### pickles2/px2-multitheme 2.0.1 (2016年6月30日)
+### pickles2/px2-multitheme v2.0.1 (2016年6月30日)
 
 - ローカルナビゲーションの生成ルールを変更： パンくず上にないページの子要素は開かないようにした。
 
-### pickles2/px2-multitheme 2.0.0 (2016年3月4日)
+### pickles2/px2-multitheme v2.0.0 (2016年3月4日)
 
 - 初版リリース。
 

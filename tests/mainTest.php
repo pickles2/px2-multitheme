@@ -241,7 +241,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testThemeCollectionDir()
+	} // testThemeCollectionDir()
 
 	/**
 	 * 後始末
@@ -251,7 +251,9 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testFinal()
+		$this->assertTrue( true );
+
+	} // testFinal()
 
 
 

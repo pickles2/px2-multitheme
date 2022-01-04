@@ -54,25 +54,25 @@ class theme{
 
 		$this->conf = new \stdClass();
 		$this->conf->path_theme_collection = $this->px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
-		if( property_exists($options, 'path_theme_collection') && strlen(@$options->path_theme_collection) ){
+		if( property_exists($options, 'path_theme_collection') && strlen(''.@$options->path_theme_collection) ){
 			$this->conf->path_theme_collection = $this->px->fs()->get_realpath($options->path_theme_collection.DIRECTORY_SEPARATOR);
 		}
 		$this->conf->default_theme_id = 'default';
 
-		if( property_exists($options, 'default_theme_id') && strlen(@$options->default_theme_id) ){
+		if( property_exists($options, 'default_theme_id') && strlen(''.@$options->default_theme_id) ){
 			$this->conf->default_theme_id = $options->default_theme_id;
 		}
 		$this->conf->attr_bowl_name_by = 'data-contents-area';
-		if( property_exists($options, 'attr_bowl_name_by') && strlen(@$options->attr_bowl_name_by) ){
+		if( property_exists($options, 'attr_bowl_name_by') && strlen(''.@$options->attr_bowl_name_by) ){
 			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
 		}
-		if( property_exists($options, 'param_theme_switch') && strlen(@$options->param_theme_switch) ){
+		if( property_exists($options, 'param_theme_switch') && strlen(''.@$options->param_theme_switch) ){
 			$this->param_theme_switch = $options->param_theme_switch;
 		}
-		if( property_exists($options, 'cookie_theme_switch') && strlen(@$options->cookie_theme_switch) ){
+		if( property_exists($options, 'cookie_theme_switch') && strlen(''.@$options->cookie_theme_switch) ){
 			$this->cookie_theme_switch = $options->cookie_theme_switch;
 		}
-		if( property_exists($options, 'param_layout_switch') && strlen(@$options->param_layout_switch) ){
+		if( property_exists($options, 'param_layout_switch') && strlen(''.@$options->param_layout_switch) ){
 			$this->param_layout_switch = $options->param_layout_switch;
 		}
 
@@ -83,7 +83,7 @@ class theme{
 
 		// サイトマップからページ情報を取得
 		$this->page = $this->px->site()->get_current_page_info();
-		if( @!strlen( $this->page['layout'] ) ){
+		if( @!strlen( ''.$this->page['layout'] ) ){
 			$this->page['layout'] = 'default';
 		}
 
@@ -107,23 +107,23 @@ class theme{
 			$theme_id_num = @$matched[3];
 		}
 
-		if( !strlen($this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
+		if( !strlen(''.$this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
 			// 自身の composer.json を探す
 			$composer_json = @$this->px->fs()->read_file($path_composer_root_dir.'/composer.json');
 			$composer_json = @json_decode($composer_json);
-			if( !strlen($this->theme_id) && $composer_json->extra->px2package->type == 'theme' ){
+			if( !strlen(''.$this->theme_id) && $composer_json->extra->px2package->type == 'theme' ){
 				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package->path );
 			}elseif( $this->theme_id == '@'.$theme_id_num && $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
 				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package[$theme_id_num]->path );
 			}
 		}
-		if( !is_dir($this->path_theme_dir) && $theme_id_1 == $this->theme_id ){
+		if( !is_dir(''.$this->path_theme_dir) && $theme_id_1 == $this->theme_id ){
 			// テーマコレクションを探す
 			$this->path_theme_dir = $this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$this->theme_id.'/' );
 		}
-		if( !is_dir($this->path_theme_dir) ){
+		if( !is_dir(''.$this->path_theme_dir) ){
 			// vendor内の composer.json を探す
-			if( is_dir($path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2.'/') ){
+			if( is_dir(''.$path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2.'/') ){
 				$tmp_composer_pkg_root = $path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2;
 				$composer_json = @$this->px->fs()->read_file($tmp_composer_pkg_root.'/composer.json');
 				$composer_json = @json_decode($composer_json);
@@ -135,7 +135,7 @@ class theme{
 				unset($tmp_composer_pkg_root);
 			}
 		}
-		if( !is_dir($this->path_theme_dir) ){
+		if( !is_dir(''.$this->path_theme_dir) ){
 			// vendor内の themeフォルダ を探す
 			$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/vendor/'.$this->theme_id.'/theme/' );
 		}
@@ -143,7 +143,7 @@ class theme{
 
 
 		// テーマのリソースファイルをキャッシュに複製する
-		if( is_dir($this->path_theme_dir.'/theme_files/') ){
+		if( is_dir(''.$this->path_theme_dir.'/theme_files/') ){
 			$this->px->fs()->copy_r(
 				$this->path_theme_dir.'/theme_files/' ,
 				$this->px->realpath_plugin_files('/'.urlencode($this->theme_id).'/')
@@ -156,16 +156,16 @@ class theme{
 	 */
 	private function auto_select_theme(){
 		$this->theme_id = @$this->conf->default_theme_id;
-		if( !strlen( $this->theme_id ) ){
+		if( !strlen( ''.$this->theme_id ) ){
 			$this->theme_id = 'default';
 		}
 
-		if( strlen( @$this->px->req()->get_cookie($this->cookie_theme_switch) ) ){
+		if( strlen( ''.@$this->px->req()->get_cookie($this->cookie_theme_switch) ) ){
 			$this->theme_id = @$this->px->req()->get_cookie($this->cookie_theme_switch);
 		}
 
 		$param_theme_id = $this->px->req()->get_param($this->param_theme_switch);
-		if( strlen( $param_theme_id ) && $this->is_valid_theme_id( $param_theme_id ) ){
+		if( strlen( ''.$param_theme_id ) && $this->is_valid_theme_id( $param_theme_id ) ){
 			// GETパラメータに、有効な THEME が入ってたら
 
 			if( $this->theme_id !== $param_theme_id ){
@@ -203,7 +203,7 @@ class theme{
 
 		// 1. パラメータに指定された LAYOUT を探す
 		$param_layout_switch = $this->px->req()->get_param($this->param_layout_switch);
-		if( strlen($this->param_layout_switch) && strlen($param_layout_switch) ){
+		if( strlen(''.$this->param_layout_switch) && strlen(''.$param_layout_switch) ){
 			if( $this->px->fs()->is_file($this->path_theme_dir.$param_layout_switch.'.html') ){
 				$this->page['layout'] = $param_layout_switch;
 				return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
