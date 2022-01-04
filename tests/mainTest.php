@@ -3,7 +3,7 @@
  * test
  */
 
-class mainTest extends PHPUnit_Framework_TestCase{
+class mainTest extends PHPUnit\Framework\TestCase{
 
 	/**
 	 * ファイルシステムユーティリティ
@@ -13,7 +13,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * setup
 	 */
-	public function setup(){
+	public function setUp() : void{
 		$this->fs = new \tomk79\filesystem();
 	}
 
