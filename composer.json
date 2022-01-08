@@ -14,7 +14,7 @@
             "php ./vendor/phpunit/phpunit/phpunit"
         ],
         "documentation": [
-            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.0.6 API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
+            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.1.0 API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
         ]
     } ,
     "repositories": [
@@ -28,7 +28,7 @@
         "pickles2/broccoli-module-plain-html-elements": "~0.1",
         "pickles2/px2-px2dthelper": "~2.0",
         "pickles2/px-fw-2.x": "~2.1|~2.0",
-        "phpdocumentor/phpdocumentor": "^3.0"
+        "phpdocumentor/phpdocumentor": "~3.0.0"
     },
     "autoload": {
         "files": [
