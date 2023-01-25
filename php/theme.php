@@ -54,25 +54,25 @@ class theme{
 
 		$this->conf = new \stdClass();
 		$this->conf->path_theme_collection = $this->px->get_path_homedir().'themes'.DIRECTORY_SEPARATOR;
-		if( property_exists($options, 'path_theme_collection') && strlen(''.@$options->path_theme_collection) ){
+		if( property_exists($options, 'path_theme_collection') && strlen($options->path_theme_collection ?? '') ){
 			$this->conf->path_theme_collection = $this->px->fs()->get_realpath($options->path_theme_collection.DIRECTORY_SEPARATOR);
 		}
 		$this->conf->default_theme_id = 'default';
 
-		if( property_exists($options, 'default_theme_id') && strlen(''.@$options->default_theme_id) ){
+		if( property_exists($options, 'default_theme_id') && strlen($options->default_theme_id ?? '') ){
 			$this->conf->default_theme_id = $options->default_theme_id;
 		}
 		$this->conf->attr_bowl_name_by = 'data-contents-area';
-		if( property_exists($options, 'attr_bowl_name_by') && strlen(''.@$options->attr_bowl_name_by) ){
+		if( property_exists($options, 'attr_bowl_name_by') && strlen($options->attr_bowl_name_by ?? '') ){
 			$this->conf->attr_bowl_name_by = $options->attr_bowl_name_by;
 		}
-		if( property_exists($options, 'param_theme_switch') && strlen(''.@$options->param_theme_switch) ){
+		if( property_exists($options, 'param_theme_switch') && strlen($options->param_theme_switch ?? '') ){
 			$this->param_theme_switch = $options->param_theme_switch;
 		}
-		if( property_exists($options, 'cookie_theme_switch') && strlen(''.@$options->cookie_theme_switch) ){
+		if( property_exists($options, 'cookie_theme_switch') && strlen($options->cookie_theme_switch ?? '') ){
 			$this->cookie_theme_switch = $options->cookie_theme_switch;
 		}
-		if( property_exists($options, 'param_layout_switch') && strlen(''.@$options->param_layout_switch) ){
+		if( property_exists($options, 'param_layout_switch') && strlen($options->param_layout_switch ?? '') ){
 			$this->param_layout_switch = $options->param_layout_switch;
 		}
 
@@ -83,7 +83,7 @@ class theme{
 
 		// サイトマップからページ情報を取得
 		$this->page = $this->px->site()->get_current_page_info();
-		if( @!strlen( ''.$this->page['layout'] ) ){
+		if( !strlen( $this->page['layout'] ?? '' ) ){
 			$this->page['layout'] = 'default';
 		}
 
@@ -96,21 +96,21 @@ class theme{
 		preg_match('/^([a-zA-Z0-9\_\-\.]*)(?:\/([a-zA-Z0-9\_\-\.]*))?(?:\@([0-9]*?))?$/', $this->theme_id, $matched);
 		$theme_id_1 = null;
 		if( array_key_exists(1, $matched) ){
-			$theme_id_1 = @$matched[1];
+			$theme_id_1 = $matched[1] ?? null;
 		}
 		$theme_id_2 = null;
 		if( array_key_exists(2, $matched) ){
-			$theme_id_2 = @$matched[2];
+			$theme_id_2 = $matched[2] ?? null;
 		}
 		$theme_id_num = null;
 		if( array_key_exists(3, $matched) ){
-			$theme_id_num = @$matched[3];
+			$theme_id_num = $matched[3] ?? null;
 		}
 
 		if( !strlen(''.$this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
 			// 自身の composer.json を探す
-			$composer_json = @$this->px->fs()->read_file($path_composer_root_dir.'/composer.json');
-			$composer_json = @json_decode($composer_json);
+			$composer_json = $this->px->fs()->read_file($path_composer_root_dir.'/composer.json');
+			$composer_json = json_decode($composer_json ?? '');
 			if( !strlen(''.$this->theme_id) && $composer_json->extra->px2package->type == 'theme' ){
 				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package->path );
 			}elseif( $this->theme_id == '@'.$theme_id_num && $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
@@ -125,8 +125,8 @@ class theme{
 			// vendor内の composer.json を探す
 			if( is_dir(''.$path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2.'/') ){
 				$tmp_composer_pkg_root = $path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2;
-				$composer_json = @$this->px->fs()->read_file($tmp_composer_pkg_root.'/composer.json');
-				$composer_json = @json_decode($composer_json);
+				$composer_json = $this->px->fs()->read_file($tmp_composer_pkg_root.'/composer.json');
+				$composer_json = json_decode($composer_json ?? '');
 				if( $composer_json->extra->px2package->type == 'theme' ){
 					$this->path_theme_dir = $this->px->fs()->get_realpath( $tmp_composer_pkg_root.'/'.$composer_json->extra->px2package->path );
 				}elseif( $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
@@ -155,13 +155,13 @@ class theme{
 	 * auto select theme
 	 */
 	private function auto_select_theme(){
-		$this->theme_id = @$this->conf->default_theme_id;
-		if( !strlen( ''.$this->theme_id ) ){
+		$this->theme_id = $this->conf->default_theme_id ?? null;
+		if( !strlen($this->theme_id ?? '') ){
 			$this->theme_id = 'default';
 		}
 
-		if( strlen( ''.@$this->px->req()->get_cookie($this->cookie_theme_switch) ) ){
-			$this->theme_id = @$this->px->req()->get_cookie($this->cookie_theme_switch);
+		if( strlen($this->px->req()->get_cookie($this->cookie_theme_switch) ?? '') ){
+			$this->theme_id = $this->px->req()->get_cookie($this->cookie_theme_switch);
 		}
 
 		$param_theme_id = $this->px->req()->get_param($this->param_theme_switch);
@@ -179,7 +179,7 @@ class theme{
 					$this->theme_id = $param_theme_id;
 					$this->px->req()->set_cookie( $this->cookie_theme_switch, $this->theme_id );
 
-					if( $this->theme_id == @$this->conf->default_theme_id ){
+					if( $this->theme_id == ($this->conf->default_theme_id ?? null) ){
 						$this->px->req()->delete_cookie( $this->cookie_theme_switch );
 					}
 				}
@@ -267,7 +267,7 @@ class theme{
 	 * @return mixed テーマのオプション
 	 */
 	public function get_option($key){
-		return @$this->theme_options[$this->theme_id][$key];
+		return $this->theme_options[$this->theme_id][$key] ?? null;
 	}
 
 
@@ -326,10 +326,10 @@ class theme{
 					// px2package に theme が定義されている場合
 					if( $this->px->fs()->is_file( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/composer.json' ) ){
 						$composer_json = $this->px->fs()->read_file( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/composer.json' );
-						$composer_json = @json_decode($composer_json);
-						if( @is_array($composer_json->extra->px2package) ){
+						$composer_json = json_decode($composer_json ?? '');
+						if( is_array($composer_json->extra->px2package ?? null) ){
 							foreach( $composer_json->extra->px2package as $package_idx=>$package ){
-								if( @$package->type == 'theme' ){
+								if( ($package->type ?? null) == 'theme' ){
 									$collection[$vendor_id.'/'.$package_id.'@'.$package_idx] = [
 										'id'=>$vendor_id.'/'.$package_id.'@'.$package_idx,
 										'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$package->path ),
@@ -337,7 +337,7 @@ class theme{
 									];
 								}
 							}
-						}elseif( @$composer_json->extra->px2package->type == 'theme' ){
+						}elseif( ($composer_json->extra->px2package->type ?? null) == 'theme' ){
 							$collection[$vendor_id.'/'.$package_id] = [
 								'id'=>$vendor_id.'/'.$package_id,
 								'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/vendor/'.$vendor_id.'/'.$package_id.'/'.@$composer_json->extra->px2package->path ),
@@ -364,7 +364,7 @@ class theme{
 		// (最優先)
 		if( $this->px->fs()->is_file( $tmp_composer_root_dir.'/composer.json' ) ){
 			$composer_json = $this->px->fs()->read_file( $tmp_composer_root_dir.'/composer.json' );
-			$composer_json = @json_decode($composer_json);
+			$composer_json = json_decode($composer_json ?? '');
 			if( @is_array($composer_json->extra->px2package) ){
 				foreach( $composer_json->extra->px2package as $package_idx=>$package ){
 					if( @$package->type == 'theme' ){
@@ -375,7 +375,7 @@ class theme{
 						];
 					}
 				}
-			}elseif( @$composer_json->extra->px2package->type == 'theme' ){
+			}elseif( ($composer_json->extra->px2package->type ?? null) == 'theme' ){
 				$collection[''] = [
 					'id'=>'',
 					'path'=>$this->px->fs()->get_realpath( $tmp_composer_root_dir.'/'.@$composer_json->extra->px2package->path ),
@@ -416,7 +416,7 @@ class theme{
 	 * @return string レイアウト名
 	 */
 	public function get_layout(){
-		return @$this->page['layout'];
+		return $this->page['layout'] ?? null;
 	}
 
 	/**
@@ -425,7 +425,7 @@ class theme{
 	 * @return string Theme ID
 	 */
 	public function get_theme_id(){
-		return @$this->theme_id;
+		return $this->theme_id ?? null;
 	}
 
 	/**

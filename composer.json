@@ -9,6 +9,13 @@
             "email": "tomk79@gmail.com"
         }
     ],
+    "config": {
+        "process-timeout": 0,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "minimum-stability": "dev",
     "scripts":{
         "test": [
             "php ./vendor/phpunit/phpunit/phpunit"
@@ -32,8 +39,8 @@
     },
     "autoload": {
         "files": [
-            "px-files/php/theme.php",
-            "px-files/php/template_utility.php"
+            "php/theme.php",
+            "php/template_utility.php"
         ]
     },
     "extra": {
