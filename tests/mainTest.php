@@ -23,15 +23,12 @@ class mainTest extends PHPUnit\Framework\TestCase{
 	public function testMain(){
 
 		// トップページを実行
-		$output = $this->passthru( ['php', __DIR__.'/../.px_execute.php' , '/'] );
-
-		// var_dump($output);
+		$output = $this->passthru( ['php', __DIR__.'/../src_px2/.px_execute.php' , '/'] );
 		$this->assertTrue( gettype($output) == gettype('') );
 
 		// 後始末
-		$output = $this->passthru( ['php', __DIR__.'/../.px_execute.php' , '/?PX=clearcache'] );
-
-	}//testMain()
+		$output = $this->passthru( ['php', __DIR__.'/../src_px2/.px_execute.php' , '/?PX=clearcache'] );
+	}
 
 	/**
 	 * theme "standard"

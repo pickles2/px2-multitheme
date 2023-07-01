@@ -9,11 +9,11 @@
 /.env.sample            export-ignore
 /appveyor.yml           export-ignore
 /tests                  export-ignore
-/src                    export-ignore
 /mix-manifest.json      export-ignore
 /phpunit.xml            export-ignore
 /webpack.mix.js         export-ignore
 
+/src_px2                export-ignore
 /index.html.md          export-ignore
 /.px_execute.php        export-ignore
 /px-files               export-ignore

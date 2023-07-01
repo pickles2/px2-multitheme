@@ -21,7 +21,7 @@
             "php ./vendor/phpunit/phpunit/phpunit"
         ],
         "documentation": [
-            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.1.1 API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
+            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.1.1 API Document\" -d \"./px-files/php/\" -t \"./docs/\""
         ]
     } ,
     "repositories": [

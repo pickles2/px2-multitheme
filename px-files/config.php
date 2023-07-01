@@ -112,7 +112,7 @@ return call_user_func( function(){
 		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode(array(
 			'param_theme_switch'=>'THEME',
 			'cookie_theme_switch'=>'THEME',
-			'path_theme_collection'=>'./px-files/themes/',
+			'path_theme_collection'=>'../px-files/themes/',
 			'attr_bowl_name_by'=>'data-contents-area',
 			'default_theme_id'=>'pickles2',
 			'options'=>array(
