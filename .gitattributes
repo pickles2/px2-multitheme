@@ -14,10 +14,6 @@
 /webpack.mix.js         export-ignore
 
 /src_px2                export-ignore
-/index.html.md          export-ignore
-/.px_execute.php        export-ignore
 /px-files               export-ignore
-/caches                 export-ignore
-/sample_pages           export-ignore
 
 *.php diff=php

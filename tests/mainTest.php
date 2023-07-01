@@ -34,6 +34,8 @@ class mainTest extends PHPUnit\Framework\TestCase{
 	 * theme "standard"
 	 */
 	public function testValidThemeId(){
+		$cd = realpath('.');
+		chdir(__DIR__.'/testdata/standard/');
 		$px = new picklesFramework2\px(__DIR__.'/testdata/standard/px-files/');
 		$multitheme = new \tomk79\pickles2\multitheme\theme($px);
 
@@ -89,6 +91,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		$this->assertTrue( $multitheme->is_valid_theme_id('a/b') );
 		$this->assertTrue( !$multitheme->is_valid_theme_id('a?b') );
 
+		chdir($cd);
 	}//testValidThemeId()
 
 
