@@ -108,7 +108,7 @@ return call_user_func( function(){
 		'picklesFramework2\processors\autoindex\autoindex::exec' ,
 
 		// テーマ
-		'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode(array(
+		'theme' => \tomk79\pickles2\multitheme\theme::exec(array(
 			'param_theme_switch'=>'TEST_THEME_PARAM',
 			'cookie_theme_switch'=>'TEST_THEME_PARAM',
 			'path_theme_collection'=>'../standard/px-files/themes/',
@@ -116,10 +116,10 @@ return call_user_func( function(){
 			'default_theme_id'=>'not_exists',
 			'options'=>array(
 				'standard2'=>array(
-					'sample_param'=>'hoge'
-				)
-			)
-		)).')' ,
+					'sample_param'=>'hoge',
+				),
+			),
+		)),
 
 		// Apache互換のSSIの記述を解決する
 		'picklesFramework2\processors\ssi\ssi::exec' ,
