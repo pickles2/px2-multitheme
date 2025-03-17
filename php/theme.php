@@ -256,7 +256,7 @@ class theme {
 		if($exectype == 'kflow'){
 			$kaleflower = new \kaleflower\kaleflower();
 			$kflow_built = $kaleflower->build(
-				$_kflowPath,
+				$path_theme_layout_file,
 				array(
 					'assetsPrefix' => './theme_files/',
 				)
