@@ -253,9 +253,24 @@ class theme {
 			$exectype = 'kflow';
 		}
 
-		ob_start();
-		include( $path_theme_layout_file );
-		$tmp_src = ob_get_clean();
+		if($exectype == 'kflow'){
+			$kaleflower = new \kaleflower\kaleflower();
+			$kflow_built = $kaleflower->build(
+				$_kflowPath,
+				array(
+					'assetsPrefix' => './theme_files/',
+				)
+			);
+			$tmp_src = $kflow_built->html->main;
+				// TODO: テーマとして成立するための加工処理を追加する
+				// TODO: アセット類の書き出しとリンクを追加する
+
+		}else{
+			ob_start();
+			include( $path_theme_layout_file );
+			$tmp_src = ob_get_clean();
+		}
+
 
 		$src = '';
 
