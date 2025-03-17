@@ -39,10 +39,11 @@
         "phpdocumentor/phpdocumentor": "~3.0.0"
     },
     "autoload": {
-        "files": [
-            "php/theme.php",
-            "php/template_utility.php"
-        ]
+        "psr-4": {
+            "tomk79\\pickles2\\multitheme\\": [
+                "php"
+            ]
+        }
     },
     "extra": {
         "px2package": {

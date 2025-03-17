@@ -78,7 +78,6 @@ class theme{
 
 		$this->theme_options = (property_exists($options, 'options') ? $options->options : new \stdClass());
 		$this->theme_options = json_decode( json_encode($this->theme_options), true );
-		// var_dump($this->theme_options);
 
 
 		// サイトマップからページ情報を取得
@@ -149,7 +148,7 @@ class theme{
 				$this->px->realpath_plugin_files('/'.urlencode($this->theme_id).'/')
 			);
 		}
-	} // __construct()
+	}
 
 	/**
 	 * auto select theme
@@ -203,20 +202,28 @@ class theme{
 
 		// 1. パラメータに指定された LAYOUT を探す
 		$param_layout_switch = $this->px->req()->get_param($this->param_layout_switch);
-		if( strlen(''.$this->param_layout_switch) && strlen(''.$param_layout_switch) ){
-			if( $this->px->fs()->is_file($this->path_theme_dir.$param_layout_switch.'.html') ){
+		if( strlen($this->param_layout_switch ?? '') && strlen($param_layout_switch ?? '') ){
+			if( $this->px->fs()->is_file($this->path_theme_dir.$param_layout_switch.'.html.kflow') ){
+				$this->page['layout'] = $param_layout_switch;
+				return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html.kflow' );
+			}elseif( $this->px->fs()->is_file($this->path_theme_dir.$param_layout_switch.'.html') ){
 				$this->page['layout'] = $param_layout_switch;
 				return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
 			}
 		}
 
 		// 2. ページに指定された layout を探す
-		if( $this->px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html' ) ){
+		if( $this->px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html.kflow' ) ){
+			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html.kflow' );
+		}elseif( $this->px->fs()->is_file( $this->path_theme_dir.$this->page['layout'].'.html' ) ){
 			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
 		}
 
 		// 3. 固定文字列 'default' で探す
-		if( $this->px->fs()->is_file( $this->path_theme_dir.'default'.'.html' ) ){
+		if( $this->px->fs()->is_file( $this->path_theme_dir.'default'.'.html.kflow' ) ){
+			$this->page['layout'] = 'default';
+			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html.kflow' );
+		}elseif( $this->px->fs()->is_file( $this->path_theme_dir.'default'.'.html' ) ){
 			$this->page['layout'] = 'default';
 			return $this->px->fs()->get_realpath( $this->path_theme_dir.$this->page['layout'].'.html' );
 		}
@@ -235,6 +242,11 @@ class theme{
 		$path_theme_layout_file = $this->find_layout_realpath();
 
 		$theme = new template_utility( $px, $this );
+
+		$exectype = 'html';
+		if(preg_match('/\.html\.kflow$/si', $path_theme_layout_file)){
+			$exectype = 'kflow';
+		}
 
 		ob_start();
 		include( $path_theme_layout_file );
@@ -278,7 +290,6 @@ class theme{
 	 */
 	private function get_composer_root_dir(){
 		$tmp_composer_root_dir = $this->px->fs()->get_realpath( '.' );
-		// var_dump($tmp_composer_root_dir);
 		while(1){
 			if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) && $this->px->fs()->is_file( $tmp_composer_root_dir.'/composer.json' ) ){
 				break;
@@ -290,7 +301,6 @@ class theme{
 			$tmp_composer_root_dir = dirname($tmp_composer_root_dir);
 			continue;
 		}
-		// var_dump( $tmp_composer_root_dir );
 		return $tmp_composer_root_dir;
 	}
 
@@ -307,7 +317,6 @@ class theme{
 
 		// vendorディレクトリ内から検索
 		$tmp_composer_root_dir = $this->get_composer_root_dir();
-		// var_dump( $tmp_composer_root_dir );
 
 		if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) ){
 			foreach( $this->px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
@@ -384,7 +393,6 @@ class theme{
 			}
 		}
 
-		// var_dump($collection);
 		return $collection;
 	}
 
