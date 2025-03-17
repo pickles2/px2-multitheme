@@ -34,11 +34,16 @@ class theme{
 	 * @param object $px Picklesオブジェクト
 	 * @param object $options プラグイン設定
 	 */
-	public static function exec( $px, $options = null ){
+	public static function exec( $px = null, $options = null ){
+		if( count(func_get_args()) <= 1 ){
+			return __CLASS__.'::'.__FUNCTION__.'('.( is_array($px) ? json_encode($px) : '' ).')';
+		}
+
 		$theme = new self($px, $options);
 		$src = $theme->bind($px);
 		$px->bowl()->replace($src, '');
-		return true;
+
+		return;
 	}
 
 	/**
