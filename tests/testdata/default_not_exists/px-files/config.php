@@ -78,6 +78,11 @@ return call_user_func( function(){
 
 	// funcs: Before sitemap
 	$conf->funcs->before_sitemap = [
+		// px2-clover
+		tomk79\pickles2\px2clover\register::clover(array(
+			"protect_preview" => false, // プレビューに認証を要求するか？
+		)),
+
 		// PX=clearcache
 		'picklesFramework2\commands\clearcache::register' ,
 
