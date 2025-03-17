@@ -7,3 +7,7 @@ composer.lock
 /caches/
 .phpdoc
 .phpunit.result.cache
+
+# PHP Documentor
+.phpdoc
+phpDocumentor.phar

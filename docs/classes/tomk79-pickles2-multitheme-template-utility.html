@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>pickles2/px2-multitheme 2.1.1 API Document</title>
+            <title>pickles2/px2-multitheme 2.1.1 API Document</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
-            <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js" integrity="sha256-0vuk8LXoyrmCjp1f0O300qo1M75ZQyhH9X3J6d+scmk=" crossorigin="anonymous"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -48,16 +53,27 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
-    
-    <section class="phpdocumentor-sidebar__category">
-        <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                                <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/tomk79.html"><abbr title="\tomk79">tomk79</abbr></a></h4>
-                <ul class="phpdocumentor-list">
-                                            <li><a href="namespaces/tomk79-pickles2.html"><abbr title="\tomk79\pickles2">pickles2</abbr></a></li>
-                                    </ul>
-                        </section>
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/tomk79.html" class="">tomk79</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/tomk79-pickles2.html" class="">pickles2</a>
+                
+            </li>
+            </ul>
 
-    
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
     <section class="phpdocumentor-sidebar__category">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
@@ -83,6 +99,12 @@
     template_utility
 
     
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
     
     
     </h2>
@@ -91,11 +113,11 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">10</span>
-</aside>
+
+    </aside>
 
             <p class="phpdocumentor-summary">Pickles2 Multi Theme template utility class</p>
 
-    <section class="phpdocumentor-description"></section>
 
 
 
@@ -110,87 +132,87 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -private">
+                    <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#property_multitheme">$multitheme</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd>px2-multithemeオブジェクト</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#property_px">$px</a>
     <span>
-                &nbsp;: mixed            </span>
+                        &nbsp;: mixed            </span>
 </dt>
 <dd>Picklesオブジェクト</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method___construct">__construct()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>constructor</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_files">files()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>テーマリソースへのパスを取得する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_get_attr_bowl_name_by">get_attr_bowl_name_by()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>$conf-&gt;attr_bowl_name_by 設定の値を受け取る</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_get_layout">get_layout()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>選択されたレイアウト名を取得する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_get_option">get_option()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>テーマごとのオプションを取得する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_mk_breadcrumb">mk_breadcrumb()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>パンくずを自動生成する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_mk_global_menu">mk_global_menu()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>グローバルメニューを自動生成する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_mk_megafooter_menu">mk_megafooter_menu()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>メガフッターメニューを自動生成する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_mk_shoulder_menu">mk_shoulder_menu()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>ショルダーメニューを自動生成する</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/tomk79-pickles2-multitheme-template-utility.html#method_mk_sub_menu">mk_sub_menu()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>指定されたページの子階層のメニューを展開する</dd>
 
@@ -223,7 +245,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">15</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">px2-multithemeオブジェクト</p>
 
@@ -233,6 +256,7 @@
     <span class="phpdocumentor-signature__name">$multitheme</span>
     </code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -255,7 +279,8 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">12</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">Picklesオブジェクト</p>
 
@@ -265,6 +290,7 @@
     <span class="phpdocumentor-signature__name">$px</span>
     </code>
 
+    
         <section class="phpdocumentor-description"></section>
 
     
@@ -291,16 +317,16 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">22</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">constructor</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$px</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$multitheme</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$px</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$multitheme</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -328,8 +354,7 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -346,16 +371,16 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">219</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">テーマリソースへのパスを取得する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">files</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path_resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">files</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$path_resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -393,13 +418,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">76</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">$conf-&gt;attr_bowl_name_by 設定の値を受け取る</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">get_attr_bowl_name_by</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">get_attr_bowl_name_by</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>このメソッドが返す値は、 テーマのコンテンツエリアを囲うラッパー要素にセットされるべき、bowl名を格納するための属性名です。
 デフォルトは <code class="prettyprint">data-contents-area</code> ですが、コンフィグオプションで変更することができます。</p>
@@ -441,13 +467,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">48</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">選択されたレイアウト名を取得する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">get_layout</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">get_layout</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"><p>レイアウトは、Pickles 2 のサイトマップCSVの layout 列に指定すると選択できます。</p>
 <p>layout列には、拡張子を含まない値を指定してください。
@@ -461,8 +488,7 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -479,13 +505,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">34</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">テーマごとのオプションを取得する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">get_option</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">get_option</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"><p>コンフィグオプションに指定されたテーマ別設定の値を取り出します。</p>
 </section>
@@ -508,8 +535,7 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
-            <section class="phpdocumentor-description"></section>
-
+        
     
 </article>
                     <article
@@ -526,13 +552,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">196</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">パンくずを自動生成する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">mk_breadcrumb</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">mk_breadcrumb</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>このメソッドは、パンくずリストのHTMLコードを生成して返します。
 祖先ページは aタグ で囲われ、カレントページは aタグの代わりに spanタグ で囲われます。</p>
@@ -563,13 +590,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">89</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">グローバルメニューを自動生成する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">mk_global_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">mk_global_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>サイトマップCSVに登録されたページの一覧から、グローバルメニューを自動生成し、HTMLコードを返します。</p>
 <p>対象となるページの一覧は、 <code class="prettyprint">$px-&gt;site()-&gt;get_global_menu()</code> から取得します。</p>
@@ -600,13 +628,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">163</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">メガフッターメニューを自動生成する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">mk_megafooter_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">mk_megafooter_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>メガフッターに表示する項目として、グローバルメニューの一覧と、その子階層までの一覧を構造化し、HTMLコードとして生成します。</p>
 </section>
@@ -636,13 +665,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">114</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">ショルダーメニューを自動生成する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">mk_shoulder_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">mk_shoulder_menu</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>サイトマップCSVに登録されたページの一覧から、ショルダーメニューを自動生成し、HTMLコードを返します。</p>
 <p>対象となるページの一覧は、 <code class="prettyprint">$px-&gt;site()-&gt;get_shoulder_menu()</code> から取得します。</p>
@@ -673,13 +703,14 @@
     <abbr class="phpdocumentor-element-found-in__file" title="php/template_utility.php"><a href="files/php-template-utility.html"><abbr title="php/template_utility.php">template_utility.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">139</span>
-</aside>
+
+    </aside>
 
         <p class="phpdocumentor-summary">指定されたページの子階層のメニューを展開する</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">mk_sub_menu</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parent_page_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">mk_sub_menu</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parent_page_id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"><p>主にローカルナビゲーションを生成する用途を想定したメソッドです。 <code class="prettyprint">$parent_page_id</code> に与えられたページを頂点として、ページの階層構造を HTML化して生成します。
 カレントページの直系の祖先にあたる階層は、子階層が開かれた状態で生成され、直系に当たらない階層は隠されます。</p>
@@ -710,6 +741,68 @@
 </article>
             </section>
 
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
+
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
@@ -731,5 +824,9 @@
     <script>
         cssVars({});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
 </body>
 </html>
