@@ -1,7 +1,7 @@
 {
     "name": "pickles2/px2-multitheme",
     "description": "px2-multitheme は、複数のテーマを同時に管理する機能を Pickles 2 に追加します。",
-    "keywords": ["pickles"],
+    "keywords": ["pickles2"],
     "license": "MIT",
     "authors": [
         {
@@ -9,30 +9,44 @@
             "email": "tomk79@gmail.com"
         }
     ],
+    "config": {
+        "process-timeout": 0,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "minimum-stability": "dev",
     "scripts":{
         "test": [
             "php ./vendor/phpunit/phpunit/phpunit"
         ],
         "documentation": [
-            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme API Document\" -d \"./px-files/php/\" -t \"./sample_pages/phpdoc/\""
+            "php ./vendor/phpdocumentor/phpdocumentor/bin/phpdoc --title \"pickles2/px2-multitheme 2.1.1 API Document\" -d \"./php/\" -t \"./docs/\""
         ]
     } ,
     "repositories": [
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=7.3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.1.*" ,
+        "phpunit/phpunit": "~9.5",
         "tomk79/filesystem": "1.*",
-        "pickles2/broccoli-module-plain-html-elements": "dev-develop",
-        "pickles2/px2-px2dthelper": "dev-develop",
-        "pickles2/px-fw-2.x": "dev-develop",
-        "phpdocumentor/phpdocumentor": "^2.9"
+        "pickles2/broccoli-module-plain-html-elements": "~0.1",
+        "pickles2/px2-px2dthelper": "~2.0",
+        "pickles2/px-fw-2.x": "~2.1|~2.0",
+        "phpdocumentor/phpdocumentor": "~3.0.0"
     },
     "autoload": {
         "files": [
-            "px-files/php/theme.php"
+            "php/theme.php",
+            "php/template_utility.php"
         ]
+    },
+    "extra": {
+        "px2package": {
+            "name": "pickles2/px2-multitheme",
+            "type": "processor"
+        }
     }
 }

@@ -3,7 +3,7 @@
  * test
  */
 
-class mainTest extends PHPUnit_Framework_TestCase{
+class mainTest extends PHPUnit\Framework\TestCase{
 
 	/**
 	 * ファイルシステムユーティリティ
@@ -13,7 +13,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	/**
 	 * setup
 	 */
-	public function setup(){
+	public function setUp() : void{
 		$this->fs = new \tomk79\filesystem();
 	}
 
@@ -23,15 +23,77 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	public function testMain(){
 
 		// トップページを実行
-		$output = $this->passthru( ['php', __DIR__.'/../.px_execute.php' , '/'] );
-
-		// var_dump($output);
+		$output = $this->passthru( ['php', __DIR__.'/../src_px2/.px_execute.php' , '/'] );
 		$this->assertTrue( gettype($output) == gettype('') );
 
 		// 後始末
-		$output = $this->passthru( ['php', __DIR__.'/../.px_execute.php' , '/?PX=clearcache'] );
+		$output = $this->passthru( ['php', __DIR__.'/../src_px2/.px_execute.php' , '/?PX=clearcache'] );
+	}
 
-	}//testMain()
+	/**
+	 * theme "standard"
+	 */
+	public function testValidThemeId(){
+		$cd = realpath('.');
+		chdir(__DIR__.'/testdata/standard/');
+		$px = new picklesFramework2\px(__DIR__.'/testdata/standard/px-files/');
+		$multitheme = new \tomk79\pickles2\multitheme\theme($px);
+
+		$this->assertTrue( $multitheme->is_valid_theme_id('sample_param') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr/pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr/pkg/sub') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr.dir/pkg.pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr..dir/pkg..pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('vndr...dir/pkg...pkg') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('.vndr...dir./.pkg...pkg.') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('..vndr...dir../..pkg...pkg..') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('...vndr...dir../..pkg...pkg...') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('/...vndr...dir../..pkg...pkg...') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('...vndr...dir../..pkg...pkg.../') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa//bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('../..') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('./.') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/.') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/..') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('./aaa') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('../aaa') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('aaa/.../bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/../bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa/./bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('aaa'."\n".'bbb') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a%b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a!b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a@b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a#b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a$b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a%b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a^b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a&b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a*b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a(b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a)b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a{b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a}b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a[b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a]b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a\\b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a|b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a~b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a`b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a:b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a;b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a\'b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a"b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a<b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a>b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a,b') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('a.b') );
+		$this->assertTrue( $multitheme->is_valid_theme_id('a/b') );
+		$this->assertTrue( !$multitheme->is_valid_theme_id('a?b') );
+
+		chdir($cd);
+	}//testValidThemeId()
+
 
 	/**
 	 * theme "standard"
@@ -179,7 +241,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testThemeCollectionDir()
+	} // testThemeCollectionDir()
 
 	/**
 	 * 後始末
@@ -189,7 +251,9 @@ class mainTest extends PHPUnit_Framework_TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testFinal()
+		$this->assertTrue( true );
+
+	} // testFinal()
 
 
 
@@ -200,6 +264,7 @@ class mainTest extends PHPUnit_Framework_TestCase{
 	 * @return string コマンドの標準出力値
 	 */
 	private function passthru( $ary_command ){
+		set_time_limit(180); // Windowsのtestがタイム・アウトするため追加
 		$cmd = array();
 		foreach( $ary_command as $row ){
 			$param = '"'.addslashes($row).'"';

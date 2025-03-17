@@ -9,9 +9,9 @@
 <?= $px->get_contents_manifesto(); ?>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="<?= htmlspecialchars( $px->path_plugin_files('/bootstrap/css/bootstrap.min.css') ); ?>">
-<script src="<?= htmlspecialchars( $px->path_plugin_files('/bootstrap/js/bootstrap.min.js') ); ?>"></script>
+<link rel="stylesheet" href="<?= htmlspecialchars( $theme->files('/bootstrap/css/bootstrap.min.css') ); ?>">
+<script src="<?= htmlspecialchars( $theme->files('/bootstrap/js/bootstrap.min.js') ); ?>"></script>
 
 <!-- Bootstrap Theme -->
-<link rel="stylesheet" href="<?= htmlspecialchars( $px->path_plugin_files('/styles/bootstrap-theme.min.css') ); ?>">
-<link rel="stylesheet" href="<?= htmlspecialchars( $px->path_plugin_files('/styles/theme.css') ); ?>">
+<link rel="stylesheet" href="<?= htmlspecialchars( $theme->files('/styles/bootstrap-theme.min.css') ); ?>">
+<link rel="stylesheet" href="<?= htmlspecialchars( $theme->files('/styles/theme.css') ); ?>">

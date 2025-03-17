@@ -45,25 +45,28 @@ Pickles 2 をセットアップします。
 composer require pickles2/px2-multitheme
 ```
 
-次に、`px-files/config.php` に設定を記述します。 デフォルトのテーマを削除して、`px2-multitheme` に変更します。
+次に、`px-files/config.php` に設定を記述します。
 
-```
+```php
 $conf->funcs->processor->html = [
 	// テーマ
-	// 'theme'=>'pickles2\themes\pickles\theme::exec' , //←削除
 	'theme'=>'tomk79\pickles2\multitheme\theme::exec' ,
 ];
 ```
 
 ## コンフィグオプション - Config Options
 
-### パラメータ名 - param_theme_switch
+### テーマ切り替えのパラメータ名 - param_theme_switch
 
 テーマ切り替えスイッチとして使用するGETパラメータ名を設定します。デフォルトは `THEME` です。
 
-### クッキー名 -  cookie_theme_switch
+### テーマ名を記憶するクッキー名 -  cookie_theme_switch
 
 切り替えたテーマ名を記憶するクッキー名を設定します。デフォルトは `THEME` です。
+
+### レイアウト切り替えのパラメータ名 - param_layout_switch
+
+レイアウト切り替えスイッチとして使用するGETパラメータ名を設定します。デフォルトは `LAYOUT` です。
 
 ### テーマコレクションディレクトリ - path_theme_collection
 
@@ -93,12 +96,13 @@ Pickles2DesktopTool のGUI編集機能に対応する設定です。Pickles2Desk
 
 ### コンフィグオプションの実装例 - Config Sample
 
-```
+```php
 $conf->funcs->processor->html = [
 	// テーマ
 	'theme'=>'tomk79\pickles2\multitheme\theme::exec('.json_encode([
 		'param_theme_switch'=>'THEME',
 		'cookie_theme_switch'=>'THEME',
+		'param_layout_switch'=>'LAYOUT',
 		'path_theme_collection'=>'./px-files/themes/',
 		'attr_bowl_name_by'=>'data-contents-area',
 		'default_theme_id'=>'pickles2',
@@ -144,6 +148,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 - `$theme->get_option()`
 - `$theme->get_layout()`
 - `$theme->get_attr_bowl_name_by()`
+- `$theme->files()`
 - `$theme->mk_global_menu()`
 - `$theme->mk_shoulder_menu()`
 - `$theme->mk_sub_menu()`
@@ -161,7 +166,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ```php
 <p>'theme_files/hoge/fuga.png' を呼び出す</p>
-<img src="<?= htmlspecialchars( $px->path_plugin_files('/hoge/fuga.png') ); ?>" alt="" />
+<img src="<?= htmlspecialchars( $theme->files('/hoge/fuga.png') ); ?>" alt="" />
 ```
 
 
@@ -175,21 +180,49 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ## 更新履歴 - Change log
 
-### px2-multitheme 2.0.3 (2016年??月??日)
+### pickles2/px2-multitheme 2.0.3 (リリース日未定)
 
 - `<?= htmlspecialchars($theme->get_attr_bowl_name_by())?>` の代わりに、 固定文字列 `data-pickles2-bowl-name` と書けるようになった。
 
-### px2-multitheme 2.0.2 (2016年7月27日)
+### pickles2/px2-multitheme v2.1.1 (2023年2月11日)
+
+- 内部コードの細かい修正。
+
+### pickles2/px2-multitheme v2.1.0 (2022年1月8日)
+
+- サポートするPHPのバージョンを `>=7.3.0` に変更。
+- PHP 8.1 に対応した。
+
+### pickles2/px2-multitheme v2.0.6 (2018年8月30日)
+
+- 細かい不具合の修正。
+
+### pickles2/px2-multitheme v2.0.5 (2018年1月24日)
+
+- 新しい設定項目 `$param_layout_switch` を追加。 GETパラメータで一時的にレイアウトを切り替えて表示できるようになった。
+- `./theme_files/〜〜` という記述でテーマリソースにアクセスできるようになった。 `$theme->files()` が暗黙的に呼ばれ、置き換えられる。
+
+### pickles2/px2-multitheme v2.0.4 (2017年7月28日)
+
+- 異なるテーマで同時アクセスしたときに、リソースのパスが混在する問題を修正。
+
+### pickles2/px2-multitheme v2.0.3 (2017年7月11日)
+
+- テーマテンプレートの実装を助ける目的ではないメソッドを `$theme` から分離して隠蔽した。
+- `$theme->files()` を追加。
+- `px2package` を参照してテーマを検索するようになった。
+
+### pickles2/px2-multitheme v2.0.2 (2016年7月27日)
 
 - パンくず上にカレントページがある場合に、リンクではなくなるようになった。
 - 誤ったテーマIDを選択した場合に、仮のテーマに包んで画面を返すようになった。
 - その他、不具合の修正とパフォーマンス向上。
 
-### px2-multitheme 2.0.1 (2016年6月30日)
+### pickles2/px2-multitheme v2.0.1 (2016年6月30日)
 
 - ローカルナビゲーションの生成ルールを変更： パンくず上にないページの子要素は開かないようにした。
 
-### px2-multitheme 2.0.0 (2016年3月4日)
+### pickles2/px2-multitheme v2.0.0 (2016年3月4日)
 
 - 初版リリース。
 
@@ -202,8 +235,8 @@ MIT License
 ## 作者 - Author
 
 - Tomoya Koyanagi <tomk79@gmail.com>
-- website: <http://www.pxt.jp/>
-- Twitter: @tomk79 <http://twitter.com/tomk79/>
+- website: <https://www.pxt.jp/>
+- Twitter: @tomk79 <https://twitter.com/tomk79/>
 
 
 ## 開発者向け情報 - for Developer
