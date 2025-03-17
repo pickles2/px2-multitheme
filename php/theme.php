@@ -7,7 +7,7 @@ namespace tomk79\pickles2\multitheme;
 /**
  * Pickles2 Multi Theme CORE class
  */
-class theme{
+class theme {
 	/** Picklesオブジェクト */
 	private $px;
 	/** テーマディレクトリのパス */
@@ -83,7 +83,6 @@ class theme{
 
 		$this->theme_options = (property_exists($options, 'options') ? $options->options : new \stdClass());
 		$this->theme_options = json_decode( json_encode($this->theme_options), true );
-		// var_dump($this->theme_options);
 
 
 		// サイトマップからページ情報を取得
@@ -154,7 +153,7 @@ class theme{
 				$this->px->realpath_plugin_files('/'.urlencode($this->theme_id).'/')
 			);
 		}
-	} // __construct()
+	}
 
 	/**
 	 * auto select theme
@@ -283,7 +282,6 @@ class theme{
 	 */
 	private function get_composer_root_dir(){
 		$tmp_composer_root_dir = $this->px->fs()->get_realpath( '.' );
-		// var_dump($tmp_composer_root_dir);
 		while(1){
 			if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) && $this->px->fs()->is_file( $tmp_composer_root_dir.'/composer.json' ) ){
 				break;
@@ -295,7 +293,6 @@ class theme{
 			$tmp_composer_root_dir = dirname($tmp_composer_root_dir);
 			continue;
 		}
-		// var_dump( $tmp_composer_root_dir );
 		return $tmp_composer_root_dir;
 	}
 
@@ -312,7 +309,6 @@ class theme{
 
 		// vendorディレクトリ内から検索
 		$tmp_composer_root_dir = $this->get_composer_root_dir();
-		// var_dump( $tmp_composer_root_dir );
 
 		if( $this->px->fs()->is_dir( $tmp_composer_root_dir.'/vendor/' ) ){
 			foreach( $this->px->fs()->ls( $tmp_composer_root_dir.'/vendor/' ) as $vendor_id ){
@@ -389,7 +385,6 @@ class theme{
 			}
 		}
 
-		// var_dump($collection);
 		return $collection;
 	}
 
