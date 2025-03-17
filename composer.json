@@ -27,7 +27,8 @@
     "repositories": [
     ],
     "require": {
-        "php": ">=7.3.0"
+        "php": ">=7.3.0",
+        "broccoli-html-editor/kaleflower": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.5",
