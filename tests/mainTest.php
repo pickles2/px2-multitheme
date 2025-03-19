@@ -92,7 +92,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		$this->assertTrue( !$multitheme->is_valid_theme_id('a?b') );
 
 		chdir($cd);
-	}//testValidThemeId()
+	}
 
 
 	/**
@@ -103,7 +103,6 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// トップページを実行
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/'] );
 
-		// var_dump($output);
 		$this->assertEquals( preg_match( '/'.preg_quote('standard - default.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area="main">', '/').'/', $output ), 1 );
@@ -118,10 +117,27 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		$this->assertEquals( preg_match( '/'.preg_quote('standard - test1.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_test1.html</p>', '/').'/', $output ), 1 );
 
+		// /layout_kflow.html を実行
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/layout_kflow.html'] );
+		$this->assertEquals( preg_match( '/'.preg_quote('standard - kflow.html.kflow', '/').'/', $output ), 1 );
+		$this->assertEquals( preg_match( '/'.preg_quote('<p>/layout_kflow.html</p>', '/').'/', $output ), 1 );
+
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
+	}
 
-	}//testStandard()
+	/**
+	 * theme "standard" publish
+	 */
+	public function testStandardPublish(){
+		$this->assertEquals( 1, 1 );
+
+		// publish
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=publish.run'] );
+
+		// 後始末
+		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
+	}
 
 	/**
 	 * theme "standard2"
@@ -149,7 +165,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testStandard2()
+	}
 
 	/**
 	 * theme "standard3"
@@ -176,7 +192,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/standard/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testStandard3()
+	}
 
 	/**
 	 * theme "not_exists"
@@ -213,7 +229,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
 
-	}//testNotExists()
+	}
 
 	/**
 	 * theme_collection_dir の設定がぜんぜん別の場所を指している場合のテスト
@@ -223,7 +239,6 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		// トップページを実行
 		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?TEST_THEME_PARAM=standard2'] );
 
-		// var_dump($output);
 		$this->assertEquals( preg_match( '/'.preg_quote('standard2 - default.html', '/').'/', $output ), 1 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<span>FAILED</span>', '/').'/', $output ), 0 );
 		$this->assertEquals( preg_match( '/'.preg_quote('<div class="contents" data-contents-area-custom="main">', '/').'/', $output ), 1 );
@@ -240,8 +255,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 
 		// 後始末
 		$output = $this->passthru( ['php', __DIR__.'/testdata/default_not_exists/.px_execute.php' , '/?PX=clearcache'] );
-
-	} // testThemeCollectionDir()
+	}
 
 	/**
 	 * 後始末
@@ -253,7 +267,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 
 		$this->assertTrue( true );
 
-	} // testFinal()
+	}
 
 
 
@@ -275,6 +289,6 @@ class mainTest extends PHPUnit\Framework\TestCase{
 		passthru( $cmd );
 		$bin = ob_get_clean();
 		return $bin;
-	}// passthru()
+	}
 
 }

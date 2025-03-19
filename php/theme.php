@@ -111,21 +111,21 @@ class theme {
 			$theme_id_num = $matched[3] ?? null;
 		}
 
-		if( !strlen(''.$this->theme_id) || $this->theme_id == '@'.$theme_id_num ){
+		if( !strlen($this->theme_id ?? '') || $this->theme_id == '@'.$theme_id_num ){
 			// 自身の composer.json を探す
 			$composer_json = $this->px->fs()->read_file($path_composer_root_dir.'/composer.json');
 			$composer_json = json_decode($composer_json ?? '');
-			if( !strlen(''.$this->theme_id) && $composer_json->extra->px2package->type == 'theme' ){
+			if( !strlen($this->theme_id ?? '') && $composer_json->extra->px2package->type == 'theme' ){
 				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package->path );
 			}elseif( $this->theme_id == '@'.$theme_id_num && $composer_json->extra->px2package[$theme_id_num]->type == 'theme' ){
 				$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/'.$composer_json->extra->px2package[$theme_id_num]->path );
 			}
 		}
-		if( !is_dir(''.$this->path_theme_dir) && $theme_id_1 == $this->theme_id ){
+		if( (!strlen($this->path_theme_dir ?? '') || !is_dir($this->path_theme_dir ?? '')) && $theme_id_1 == $this->theme_id ){
 			// テーマコレクションを探す
 			$this->path_theme_dir = $this->px->fs()->get_realpath( $this->conf->path_theme_collection.'/'.$this->theme_id.'/' );
 		}
-		if( !is_dir(''.$this->path_theme_dir) ){
+		if( (!strlen($this->path_theme_dir ?? '') || !is_dir($this->path_theme_dir ?? '')) ){
 			// vendor内の composer.json を探す
 			if( is_dir(''.$path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2.'/') ){
 				$tmp_composer_pkg_root = $path_composer_root_dir.'/vendor/'.$theme_id_1.'/'.$theme_id_2;
@@ -139,7 +139,7 @@ class theme {
 				unset($tmp_composer_pkg_root);
 			}
 		}
-		if( !is_dir(''.$this->path_theme_dir) ){
+		if( (!strlen($this->path_theme_dir ?? '') || !is_dir($this->path_theme_dir ?? '')) ){
 			// vendor内の themeフォルダ を探す
 			$this->path_theme_dir = $this->px->fs()->get_realpath( $path_composer_root_dir.'/vendor/'.$this->theme_id.'/theme/' );
 		}
@@ -255,15 +255,65 @@ class theme {
 
 		if($exectype == 'kflow'){
 			$kaleflower = new \kaleflower\kaleflower();
-			$kflow_built = $kaleflower->build(
+			$kflowResult = $kaleflower->build(
 				$path_theme_layout_file,
 				array(
-					'assetsPrefix' => './theme_files/',
+					'assetsPrefix' => './theme_files/layouts/'.urlencode($this->page['layout']).'/resources/',
 				)
 			);
-			$tmp_src = $kflow_built->html->main;
+			$tmp_src = $kflowResult->html->main;
 				// TODO: テーマとして成立するための加工処理を追加する
-				// TODO: アセット類の書き出しとリンクを追加する
+
+			// --------------------------------------
+			// CSSを出力する
+			$realpath_files_base = $px->realpath_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/');
+
+			$realpath_css = $px->fs()->get_realpath($realpath_files_base.'/style.css');
+			if( strlen($kflowResult->css ?? '') ){
+				if(!is_file($realpath_css) || md5_file($realpath_css) !== md5($kflowResult->css)){
+					$px->fs()->save_file($realpath_css, $kflowResult->css);
+				}
+				// $px->bowl()->replace( '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/style.css')).'" />', 'head' );
+			}elseif(is_file($realpath_css)){
+				$px->fs()->rm($realpath_css);
+			}
+
+			// --------------------------------------
+			// JSを出力する
+			$realpath_js = $px->fs()->get_realpath($realpath_files_base.'/script.js');
+			if( strlen($kflowResult->js ?? '') ){
+				if(!is_file($realpath_js) || md5_file($realpath_js) !== md5($kflowResult->js)){
+					$px->fs()->save_file($realpath_js, $kflowResult->js);
+				}
+				// $px->bowl()->replace( '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/script.js')).'"></script>', 'foot' );
+			}elseif(is_file($realpath_js)){
+				$px->fs()->rm($realpath_js);
+			}
+
+			// --------------------------------------
+			// アセットを出力する
+			$asset_basename_list = array();
+			if( count($kflowResult->assets ?? array()) ){
+				foreach($kflowResult->assets as $asset){
+					$asset_basename_list[basename($asset->path)] = true;
+					$realpath_asset = $realpath_files_base.'resources/'.basename($asset->path);
+					if(!is_file($realpath_asset) || md5_file($realpath_asset) !== md5(base64_decode($asset->base64))){
+						$px->fs()->mkdir_r(dirname($realpath_asset));
+						$px->fs()->save_file($realpath_asset, base64_decode($asset->base64));
+					}
+				}
+			}
+
+			// 未定義のアセットを削除
+			$realpath_asset_dir = $realpath_files_base.'resources/';
+			$file_list = $px->fs()->ls($realpath_asset_dir);
+			if( is_array($file_list) && count($file_list) ){
+				foreach($file_list as $file_basename){
+					if( !($asset_basename_list[$file_basename] ?? null) ){
+						$px->fs()->rm($realpath_asset_dir.$file_basename);
+					}
+				}
+			}
 
 		}else{
 			ob_start();
