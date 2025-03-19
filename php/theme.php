@@ -273,7 +273,7 @@ class theme {
 				if(!is_file($realpath_css) || md5_file($realpath_css) !== md5($kflowResult->css)){
 					$px->fs()->save_file($realpath_css, $kflowResult->css);
 				}
-				// $px->bowl()->replace( '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/style.css')).'" />', 'head' );
+				$px->bowl()->replace( '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/style.css')).'" />', 'head' );
 			}elseif(is_file($realpath_css)){
 				$px->fs()->rm($realpath_css);
 			}
@@ -285,7 +285,7 @@ class theme {
 				if(!is_file($realpath_js) || md5_file($realpath_js) !== md5($kflowResult->js)){
 					$px->fs()->save_file($realpath_js, $kflowResult->js);
 				}
-				// $px->bowl()->replace( '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/script.js')).'"></script>', 'foot' );
+				$px->bowl()->replace( '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->theme_id).'/layouts/'.urlencode($this->page['layout']).'/script.js')).'"></script>', 'foot' );
 			}elseif(is_file($realpath_js)){
 				$px->fs()->rm($realpath_js);
 			}
