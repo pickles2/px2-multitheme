@@ -24,7 +24,7 @@ overflow: hidden;
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
-</div><div class="px2-p"><p>テストブロック</p></div><custom-component-002/><custom-component-001 width="100%" image="{&quot;assetId&quot;:&quot;e6fc4809-2ea8-4278-b1af-e6f67ca75d10&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo001_thumb.jpg&quot;}"><div/></custom-component-001>
+</div><div class="px2-p"><p>テストブロック</p></div><bowl/><custom-component-002/><custom-component-001 width="100%" image="{&quot;assetId&quot;:&quot;e6fc4809-2ea8-4278-b1af-e6f67ca75d10&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo001_thumb.jpg&quot;}"><div/></custom-component-001>
 <div>
 	<div><img class="test-image-sample" alt="{&quot;text&quot;:&quot;1つめのaltテキスト&quot;}" image="{&quot;assetId&quot;:&quot;95a0cd90-0468-4f12-806f-4a13a9327a8b&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo009_thumb.jpg&quot;}"/><div>
 			<p>テスト文字列</p>
@@ -48,6 +48,24 @@ overflow: hidden;
 	<fields>
 	</fields>
 	<components>
+		<component name="bowl" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="contents">
+<div style="display:block; width:auto; background:#fdfdfd; color:#aaa; text-align:center; padding:10em 20%; border-radius: 12px; border: 4px dashed #aaa;">
+<p>{% if _ENV.lang == "ja" %}コンテンツエリア{% else %}CONTENTS AREA{% endif %}</p>
+<p>name: <strong>{{ bowlName }}</strong></p>
+</div>
+</div>
+{% endif %}
+
+{% if _ENV.mode == 'finalize' %}
+<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by() ?? '') ?>="{{bowlName}}">
+<?= $px->bowl()->pull('{{bowlName}}') ?>
+</div>
+{% endif %}
+]]></template>
+</component>
 		<component name="custom-component-001" is-void-element="false" can-set-class="true" can-set-width="true" can-set-height="true" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
 			<fields>
 				<field type="image" name="image" label="Image" />
