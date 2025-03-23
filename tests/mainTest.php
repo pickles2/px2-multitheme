@@ -31,7 +31,7 @@ class mainTest extends PHPUnit\Framework\TestCase{
 	}
 
 	/**
-	 * theme "standard"
+	 * is_valid_theme_id()
 	 */
 	public function testValidThemeId(){
 		$cd = realpath('.');
