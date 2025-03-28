@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="pagetitle" label="Page title" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+{% if _ENV.lang == "ja" %}
+<h1>ページのタイトル</h1>
+{% else %}
+<h1>Page title</h1>
+{% endif %}
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<h1><?= preg_replace('/\r\n|\r|\n/', '<br />', htmlspecialchars( $px->site()->get_current_page_info('title_h1') ?? '' )) ?></h1>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

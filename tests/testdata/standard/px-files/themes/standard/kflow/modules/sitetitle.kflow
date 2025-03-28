@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="sitetitle" label="Site title" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+			</style>
+			<template><![CDATA[
+{% set htmlElement = 'h1' %}
+{% set linkto = '/' %}
+{% if htmlElement %}<{{ htmlElement }}>{% endif %}
+{% if linkto %}<a href="{{ linkto }}">{% endif %}
+{% if _ENV.mode == 'canvas' %}{%
+    if _ENV.lang == "ja" %}サイトのタイトル{%
+    else %}Site title{%
+    endif %}{% endif %}
+{% if _ENV.mode == 'finalize' %}<?= htmlspecialchars( $px->conf()->name ?? '' ); ?>{% endif %}
+{% if linkto %}</a>{% endif %}
+{% if htmlElement %}</{{ htmlElement }}>{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

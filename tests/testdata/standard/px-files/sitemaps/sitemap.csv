@@ -1,4 +1,4 @@
 "* path","* title","* layout"
-"/","HOME",""
+"/","HOME",
 "/layout_test1.html","TEST1","test1"
-"/layout_kflow.html","TEST1","kflow"
+"/layout_kflow.html","Kflow","kflow"

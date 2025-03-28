@@ -2,7 +2,7 @@
 <kflow>
 	<configs>
 		<config name="id" value="kf1928bb222858994f" />
-		<config name="module-name-prefix" value="cont" />
+		<config name="module-name-prefix" value="theme" />
 		<config name="break-points">
 		</config>
 		<config name="color-palettes">
@@ -19,7 +19,7 @@ overflow: hidden;
 		<style class="px2-p" width="85%"/>
 	</styles>
 	<contents>
-		<content><div class="cont-horizontal">
+		<content><sitetitle/><globalnavi/><shouldernavi/><breadcrumb/><div class="cont-horizontal">
     <p>standard - kflow.html.kflow</p>
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
@@ -36,9 +36,6 @@ overflow: hidden;
 		
 	</p>
 </div></content>
-		<content name="sidebar"><div>
-    <p>kflow sidebar contents sample</p>
-</div></content>
 	</contents>
 	<assets>
 		<asset id="95a0cd90-0468-4f12-806f-4a13a9327a8b" ext="jpg" size="2937" is-private-material="false" public-filename="95a0cd90-0468-4f12-806f-4a13a9327a8b.jpg" field="" field-note="" base64="/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAKAAD/4QMUaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA2LjAtYzAwMiA3OS4xNjQzNTIsIDIwMjAvMDEvMzAtMTU6NTA6MzggICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFCRkZGMDcwODlCNzExRUE5OEIxOEY2RUQyODNFOUFDIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFCRkZGMDZGODlCNzExRUE5OEIxOEY2RUQyODNFOUFDIiB4bXA6Q3JlYXRvclRvb2w9IjEwLjMuMSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjY3MjgwQzlENkVCRDExRTdCNTFGQUYyQTFGOTk2NTMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY3MjgwQzlFNkVCRDExRTdCNTFGQUYyQTFGOTk2NTMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQAFBAQGRIZJxcXJzImHyYyLiYmJiYuPjU1NTU1PkRBQUFBQUFERERERERE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" />
@@ -48,7 +45,7 @@ overflow: hidden;
 	<fields>
 	</fields>
 	<components>
-		<component name="bowl" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+		<component name="bowl" label="Contents Area" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
 			<template><![CDATA[
 {% if _ENV.mode == 'canvas' %}
 <div class="contents">
@@ -92,6 +89,176 @@ overflow: hidden;
 		</div>
 	</div>
 </div>]]></template>
+</component>
+		<component name="breadcrumb" label="Breadcrumb" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="theme-breadcrumb">{%
+    if _ENV.lang == "ja" %}<ul><li><a href="/">ホーム</a></li><li><strong>パンくず</strong></li></ul>{%
+    else %}<ul><li><a href="/">Home</a></li><li><strong>Topic</strong></li></ul>{%
+    endif %}</div>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<div class="theme-breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
+{% endif %}
+]]></template>
+</component>
+		<component name="copyright" label="Copyright" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<p style="text-align:center;">&copy;20XX Example.</p>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php if( strlen($px->conf()->copyright ?? '') ){ ?>
+<p style="text-align:center;">&copy;<?= htmlspecialchars($px->conf()->copyright ?? ''); ?>.</p>
+<?php } ?>
+{% endif %}
+]]></template>
+</component>
+		<component name="globalnavi" label="Global navigation" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<ul>
+{% if _ENV.lang == "ja" %}
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+{% else %}
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+{% endif %}
+</ul>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php
+	$global_menu = $px->site()->get_global_menu();
+	if( is_array($global_menu) && count($global_menu) ){
+		echo( '<ul>'."\n" );
+		foreach( $global_menu as $page_id ){
+			echo( '<li>'.$px->mk_link( $page_id ).'</li>'."\n" );
+		}
+		echo( '</ul>'."\n" );
+	}
+?>
+{% endif %}
+]]></template>
+</component>
+		<component name="localnavi" label="Local navigation" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+<nav class="theme-common-navi">
+{% if _ENV.mode == 'canvas' %}
+
+{% if _ENV.lang == "ja" %}
+<p><a href="javascript:;">親ページ名</a></p>
+<ul>
+<li><a href="javascript:;">子階層ページ1</a></li>
+<li><a href="javascript:;">子階層ページ2</a></li>
+<li><a href="javascript:;">子階層ページ3</a></li>
+<li><a href="javascript:;">子階層ページ4</a></li>
+<li><a href="javascript:;">子階層ページ5</a></li>
+<li><a href="javascript:;">子階層ページ6</a></li>
+</ul>
+{% else %}
+<p><a href="javascript:;">Parent page</a></p>
+<ul>
+<li><a href="javascript:;">Child page 1</a></li>
+<li><a href="javascript:;">Child page 2</a></li>
+<li><a href="javascript:;">Child page 3</a></li>
+<li><a href="javascript:;">Child page 4</a></li>
+<li><a href="javascript:;">Child page 5</a></li>
+<li><a href="javascript:;">Child page 6</a></li>
+</ul>
+{% endif %}
+
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php
+	$category_top_id = $px->site()->get_category_top();
+?>
+	<p><a href="<?= htmlspecialchars( $px->href($category_top_id) ?? '' ) ?>"><?= htmlspecialchars($px->site()->get_page_info($category_top_id, 'title_label') ?? '') ?></a></p>
+<?= $theme->mk_sub_menu( $category_top_id ) ?>
+{% endif %}
+</nav>
+]]></template>
+</component>
+		<component name="pagetitle" label="Page title" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+{% if _ENV.lang == "ja" %}
+<h1>ページのタイトル</h1>
+{% else %}
+<h1>Page title</h1>
+{% endif %}
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<h1><?= preg_replace('/\r\n|\r|\n/', '<br />', htmlspecialchars( $px->site()->get_current_page_info('title_h1') ?? '' )) ?></h1>
+{% endif %}
+]]></template>
+</component>
+		<component name="shouldernavi" label="Shoulder navigation" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<ul>
+{% if _ENV.lang == "ja" %}
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+{% else %}
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+{% endif %}
+</ul>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php
+	$shoulder_menu = $px->site()->get_shoulder_menu();
+	if( is_array($shoulder_menu) && count($shoulder_menu) ){
+		echo( '<ul>' );
+		foreach( $shoulder_menu as $page_id ){
+			echo( '<li>'.$px->mk_link( $page_id ).'</li>' );
+		}
+		echo( '</ul>' );
+	}
+?>
+{% endif %}
+]]></template>
+</component>
+		<component name="sitetitle" label="Site title" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% set htmlElement = 'h1' %}
+{% set linkto = '/' %}
+{% if htmlElement %}<{{ htmlElement }}>{% endif %}
+{% if linkto %}<a href="{{ linkto }}">{% endif %}
+{% if _ENV.mode == 'canvas' %}{%
+    if _ENV.lang == "ja" %}サイトのタイトル{%
+    else %}Site title{%
+    endif %}{% endif %}
+{% if _ENV.mode == 'finalize' %}<?= htmlspecialchars( $px->conf()->name ?? '' ); ?>{% endif %}
+{% if linkto %}</a>{% endif %}
+{% if htmlElement %}</{{ htmlElement }}>{% endif %}
+]]></template>
+</component>
+		<component name="update-date" label="Update date" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="theme-update-date"><p>{%
+    if _ENV.lang == "ja" %}更新日{%
+    else %}Update date{%
+    endif %}: 20XX-XX-XX</p></div>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<div class="theme-update-date"><p><?php
+    if ($px->lang() == "ja") { ?>更新日<?php 
+    } else { ?>Update date<?php
+    } ?>: <?= htmlspecialchars( $px->site()->get_current_page_info('update_date') ?? '---' ); ?></p></div>
+{% endif %}
+]]></template>
 </component>
 	</components>
 </kflow>

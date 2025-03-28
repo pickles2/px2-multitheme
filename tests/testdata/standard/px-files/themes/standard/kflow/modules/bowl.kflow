@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="bowl" label="Contents Area" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+/**
+ * コンテンツエリア
+ */
+.contents{
+	margin-bottom: 3em;
+}
+
+/**
+ * 引用
+ */
+blockquote {
+	padding: 0 0 0 1em;
+	margin: 1em 0 1em 2em;
+	margin-left: 3px solid #999;
+}
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="contents">
+<div style="display:block; width:auto; background:#fdfdfd; color:#aaa; text-align:center; padding:10em 20%; border-radius: 12px; border: 4px dashed #aaa;">
+<p>{% if _ENV.lang == "ja" %}コンテンツエリア{% else %}CONTENTS AREA{% endif %}</p>
+<p>name: <strong>{{ bowlName }}</strong></p>
+</div>
+</div>
+{% endif %}
+
+{% if _ENV.mode == 'finalize' %}
+<div class="contents" <?= htmlspecialchars($theme->get_attr_bowl_name_by() ?? '') ?>="{{bowlName}}">
+<?= $px->bowl()->pull('{{bowlName}}') ?>
+</div>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="copyright" label="Copyright" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<p style="text-align:center;">&copy;20XX Example.</p>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php if( strlen($px->conf()->copyright ?? '') ){ ?>
+<p style="text-align:center;">&copy;<?= htmlspecialchars($px->conf()->copyright ?? ''); ?>.</p>
+<?php } ?>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

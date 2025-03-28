@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="breadcrumb" label="Breadcrumb" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+/**
+ * パンくず
+ */
+.theme-breadcrumb{
+	margin:0 0;
+
+	ul,
+	ul li{
+		margin: 0;
+		padding: 0 0.3em 0 0;
+		display: inline;
+		font-size: small;
+		list-style-type: none;
+	}
+	ul li:after{
+		content:' > ';
+		margin: 0 0.3em;
+	}
+	ul li:last-child:after{
+		content:'';
+		margin: 0;
+	}
+	ul li span{
+		font-weight:bold;
+	}
+
+}
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="theme-breadcrumb">{%
+    if _ENV.lang == "ja" %}<ul><li><a href="/">ホーム</a></li><li><strong>パンくず</strong></li></ul>{%
+    else %}<ul><li><a href="/">Home</a></li><li><strong>Topic</strong></li></ul>{%
+    endif %}</div>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<div class="theme-breadcrumb"><?= $theme->mk_breadcrumb() ?></div>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

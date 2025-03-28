@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="shouldernavi" label="Shoulder navigation" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<ul>
+{% if _ENV.lang == "ja" %}
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+	<li><a href="javascript:;">ページ名</a></li>
+{% else %}
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+	<li><a href="javascript:;">Page name</a></li>
+{% endif %}
+</ul>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<?php
+	$shoulder_menu = $px->site()->get_shoulder_menu();
+	if( is_array($shoulder_menu) && count($shoulder_menu) ){
+		echo( '<ul>' );
+		foreach( $shoulder_menu as $page_id ){
+			echo( '<li>'.$px->mk_link( $page_id ).'</li>' );
+		}
+		echo( '</ul>' );
+	}
+?>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>

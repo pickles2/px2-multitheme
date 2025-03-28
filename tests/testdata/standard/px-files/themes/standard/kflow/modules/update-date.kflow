@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kflow>
+	<components>
+		<component name="update-date" label="Update date" is-void-element="true" can-set-class="false" can-set-width="false" can-set-height="false" can-set-contents-direction="false" can-set-scrollable="false" can-be-layer="false">
+			<style>
+/**
+ * 更新日
+ */
+.theme-update-date {
+	text-align: right;
+	margin: 1em 0;
+	font-size: 14px;
+}
+			</style>
+			<template><![CDATA[
+{% if _ENV.mode == 'canvas' %}
+<div class="theme-update-date"><p>{%
+    if _ENV.lang == "ja" %}更新日{%
+    else %}Update date{%
+    endif %}: 20XX-XX-XX</p></div>
+{% endif %}
+{% if _ENV.mode == 'finalize' %}
+<div class="theme-update-date"><p><?php
+    if ($px->lang() == "ja") { ?>更新日<?php 
+    } else { ?>Update date<?php
+    } ?>: <?= htmlspecialchars( $px->site()->get_current_page_info('update_date') ?? '---' ); ?></p></div>
+{% endif %}
+]]></template>
+</component>
+	</components>
+</kflow>
