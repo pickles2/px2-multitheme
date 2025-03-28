@@ -31,6 +31,12 @@ class kflow {
 		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/_kflow/'.urlencode($this->main->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/');
 		$px->fs()->mkdir_r($realpath_plugin_private_cache);
 
+		if( $px->fs()->is_newer_a_than_b($realpath_plugin_private_cache.'layout.html', $path_theme_layout_file) ){
+			// キャッシュが新しいので、キャッシュを返す
+			$src = self::exec_content( $px, $theme, $realpath_plugin_private_cache.'layout.html' );
+			return $src;
+		}
+
 		$kaleflower = new \kaleflower\kaleflower();
 		$kflowResult = $kaleflower->build(
 			$path_theme_layout_file,
@@ -38,32 +44,33 @@ class kflow {
 				'assetsPrefix' => './theme_files/layouts/'.urlencode($pageInfo['layout']).'/resources/',
 			)
 		);
-		$px->fs()->save_file($realpath_plugin_private_cache.'layout.html', $kflowResult->html->main);;
 
 		// --------------------------------------
 		// CSSを出力する
 		$realpath_files_base = $px->realpath_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/');
 
+		$src_css = '';
 		$realpath_css = $px->fs()->get_realpath($realpath_files_base.'/style.css');
 		if( strlen($kflowResult->css ?? '') ){
 			if(!is_file($realpath_css) || md5_file($realpath_css) !== md5($kflowResult->css)){
 				$px->fs()->mkdir_r(dirname($realpath_css));
 				$px->fs()->save_file($realpath_css, $kflowResult->css);
 			}
-			$px->bowl()->replace( '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/style.css')).'" />', 'head' );
+			$src_css = '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/style.css')).'" />';
 		}elseif(is_file($realpath_css)){
 			$px->fs()->rm($realpath_css);
 		}
 
 		// --------------------------------------
 		// JSを出力する
+		$src_js = '';
 		$realpath_js = $px->fs()->get_realpath($realpath_files_base.'/script.js');
 		if( strlen($kflowResult->js ?? '') ){
 			if(!is_file($realpath_js) || md5_file($realpath_js) !== md5($kflowResult->js)){
 				$px->fs()->mkdir_r(dirname($realpath_js));
 				$px->fs()->save_file($realpath_js, $kflowResult->js);
 			}
-			$px->bowl()->replace( '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/script.js')).'"></script>', 'foot' );
+			$src_js = '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/script.js')).'"></script>';
 		}elseif(is_file($realpath_js)){
 			$px->fs()->rm($realpath_js);
 		}
@@ -93,6 +100,12 @@ class kflow {
 			}
 		}
 
+		// --------------------------------------
+		// テーマを実行してHTMLを生成
+		$src_theme_layout = $this->bind_template($kflowResult->html);
+		$src_theme_layout = preg_replace('/(\<\/head\>)/si', $src_css.$src_js.'$1', $src_theme_layout);
+
+		$px->fs()->save_file($realpath_plugin_private_cache.'layout.html', $src_theme_layout);
 		$src = self::exec_content( $px, $theme, $realpath_plugin_private_cache.'layout.html' );
 
 		return $src;
@@ -109,5 +122,39 @@ class kflow {
 		include( $realpath_template_cache );
 		$src = ob_get_clean();
 		return $src;
+	}
+
+	/**
+	 * テンプレートをバインドする。
+	 * @param array $htmls HTMLコード
+	 * @return string テンプレート
+	 */
+	private function bind_template($htmls){
+		$fin = '';
+		foreach( $htmls as $bowlId=>$html ){
+			if( $bowlId == 'main' ){
+				$fin .= $htmls->main;
+			}else{
+				$fin .= "\n";
+				$fin .= "\n";
+				$fin .= '<'.'?php ob_start(); ?'.'>'."\n";
+				$fin .= (strlen($htmls->{$bowlId} ?? '') ? $htmls->{$bowlId}."\n" : '');
+				$fin .= '<'.'?php $px->bowl()->send( ob_get_clean(), '.json_encode($bowlId).' ); ?'.'>'."\n";
+				$fin .= "\n";
+			}
+		}
+		$template = '<'.'%- body %'.'>';
+		$pathBroccoliThemeLayout = $this->main->realpath_theme_dir().'/broccoli_module_packages/_layout.html';
+		$pathKflowThemeLayout = $this->main->realpath_theme_dir().'/kflow/_layout.html';
+		if(is_file($pathKflowThemeLayout)){
+			$template = file_get_contents( $pathKflowThemeLayout );
+		}elseif(is_file($pathBroccoliThemeLayout)){
+			$template = file_get_contents( $pathBroccoliThemeLayout );
+		}
+		// PHP では ejs は使えないので、単純置換することにした。
+		// $fin = $ejs.render($template, {'body': $fin}, {'delimiter': '%'});
+		$fin = str_replace('<'.'%- body %'.'>', $fin, $template);
+
+		return $fin;
 	}
 }

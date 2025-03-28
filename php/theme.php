@@ -156,6 +156,13 @@ class theme {
 	}
 
 	/**
+	 * テーマディレクトリのパスを取得する
+	 */
+	public function realpath_theme_dir(){
+		return $this->path_theme_dir;
+	}
+
+	/**
 	 * auto select theme
 	 */
 	private function auto_select_theme(){

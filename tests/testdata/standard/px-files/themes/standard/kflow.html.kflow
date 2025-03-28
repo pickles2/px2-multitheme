@@ -19,7 +19,7 @@ overflow: hidden;
 		<style class="px2-p" width="85%"/>
 	</styles>
 	<contents>
-		<content><sitetitle/><globalnavi/><shouldernavi/><breadcrumb/><div class="cont-horizontal">
+		<content><div><sitetitle/><globalnavi/><shouldernavi/><breadcrumb/></div><div class="cont-horizontal">
     <p>standard - kflow.html.kflow</p>
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
