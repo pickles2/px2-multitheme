@@ -144,12 +144,9 @@ class kflow {
 			}
 		}
 		$template = '<'.'%- body %'.'>';
-		$pathBroccoliThemeLayout = $this->main->realpath_theme_dir().'/broccoli_module_packages/_layout.html';
 		$pathKflowThemeLayout = $this->main->realpath_theme_dir().'/kflow/_layout.html';
 		if(is_file($pathKflowThemeLayout)){
 			$template = file_get_contents( $pathKflowThemeLayout );
-		}elseif(is_file($pathBroccoliThemeLayout)){
-			$template = file_get_contents( $pathBroccoliThemeLayout );
 		}
 		// PHP では ejs は使えないので、単純置換することにした。
 		// $fin = $ejs.render($template, {'body': $fin}, {'delimiter': '%'});
