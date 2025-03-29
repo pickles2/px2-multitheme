@@ -190,6 +190,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 ### pickles2/px2-multitheme v2.1.1 (2023年2月11日)
 
+- `$theme->realpath_theme_dir()` を追加した。
 - 内部コードの細かい修正。
 
 ### pickles2/px2-multitheme v2.1.0 (2022年1月8日)
