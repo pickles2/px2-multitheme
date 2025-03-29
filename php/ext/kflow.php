@@ -8,15 +8,15 @@ namespace tomk79\pickles2\multitheme\ext;
  * Pickles2 Multi Theme: Kaleflower processor
  */
 class kflow {
-	/** $main */
-	private $main;
+	/** $multitheme */
+	private $multitheme;
 
 	/**
 	 * constructor
-	 * @param object $main メインオブジェクト
+	 * @param object $multitheme メインオブジェクト
 	 */
-	public function __construct($main){
-		$this->main = $main;
+	public function __construct($multitheme){
+		$this->multitheme = $multitheme;
 	}
 
 	/**
@@ -28,7 +28,7 @@ class kflow {
 	 */
 	public function bind( $px, $theme, $pageInfo, $path_theme_layout_file ){
 
-		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/_kflow/'.urlencode($this->main->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/');
+		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/_kflow/'.urlencode($this->multitheme->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/');
 		$px->fs()->mkdir_r($realpath_plugin_private_cache);
 
 		if( $px->fs()->is_newer_a_than_b($realpath_plugin_private_cache.'layout.html', $path_theme_layout_file) ){
@@ -37,6 +37,8 @@ class kflow {
 			return $src;
 		}
 
+		// --------------------------------------
+		// Kaleflowerをビルドする
 		$kaleflower = new \kaleflower\kaleflower();
 		$kflowResult = $kaleflower->build(
 			$path_theme_layout_file,
@@ -47,7 +49,7 @@ class kflow {
 
 		// --------------------------------------
 		// CSSを出力する
-		$realpath_files_base = $px->realpath_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/');
+		$realpath_files_base = $px->realpath_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/');
 
 		$src_css = '';
 		$realpath_css = $px->fs()->get_realpath($realpath_files_base.'/style.css');
@@ -56,7 +58,7 @@ class kflow {
 				$px->fs()->mkdir_r(dirname($realpath_css));
 				$px->fs()->save_file($realpath_css, $kflowResult->css);
 			}
-			$src_css = '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/style.css')).'" />';
+			$src_css = '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/style.css')).'" />';
 		}elseif(is_file($realpath_css)){
 			$px->fs()->rm($realpath_css);
 		}
@@ -70,7 +72,7 @@ class kflow {
 				$px->fs()->mkdir_r(dirname($realpath_js));
 				$px->fs()->save_file($realpath_js, $kflowResult->js);
 			}
-			$src_js = '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->main->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/script.js')).'"></script>';
+			$src_js = '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/script.js')).'"></script>';
 		}elseif(is_file($realpath_js)){
 			$px->fs()->rm($realpath_js);
 		}
@@ -144,7 +146,7 @@ class kflow {
 			}
 		}
 		$template = '<'.'%- body %'.'>';
-		$pathKflowThemeLayout = $this->main->realpath_theme_dir().'/kflow/_layout.html';
+		$pathKflowThemeLayout = $this->multitheme->realpath_theme_dir().'/kflow/_layout.html';
 		if(is_file($pathKflowThemeLayout)){
 			$template = file_get_contents( $pathKflowThemeLayout );
 		}

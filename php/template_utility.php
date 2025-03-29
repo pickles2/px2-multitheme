@@ -22,7 +22,7 @@ class template_utility{
 	public function __construct($px, $multitheme){
 		$this->px = $px;
 		$this->multitheme = $multitheme;
-	} // __construct()
+	}
 
 	/**
 	 * テーマごとのオプションを取得する
@@ -102,6 +102,7 @@ class template_utility{
 		$rtn .= '</ul>'."\n";
 		return $rtn;
 	}
+
 	/**
 	 * ショルダーメニューを自動生成する
 	 *
@@ -127,6 +128,7 @@ class template_utility{
 		$rtn .= '</ul>'."\n";
 		return $rtn;
 	}
+
 	/**
 	 * 指定されたページの子階層のメニューを展開する
 	 *
@@ -221,4 +223,11 @@ class template_utility{
 		return $this->px->path_plugin_files($path);
 	}
 
+	/**
+	 * テーマディレクトリへのパスを取得する
+	 * @return string テーマディレクトリへの実際のパス
+	 */
+	public function realpath_theme_dir(){
+		return $this->multitheme->realpath_theme_dir();
+	}
 }
