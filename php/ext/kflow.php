@@ -29,6 +29,8 @@ class kflow {
 	public function bind( $px, $theme, $pageInfo, $path_theme_layout_file ){
 
 		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/_kflow/'.urlencode($this->multitheme->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/');
+		$path_files_base = '/kflow/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/';
+		$realpath_files_base = $px->realpath_plugin_files($path_files_base);
 		$px->fs()->mkdir_r($realpath_plugin_private_cache);
 
 		if( $px->fs()->is_newer_a_than_b($realpath_plugin_private_cache.'layout.html', $path_theme_layout_file) ){
@@ -49,8 +51,6 @@ class kflow {
 
 		// --------------------------------------
 		// CSSを出力する
-		$realpath_files_base = $px->realpath_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/');
-
 		$src_css = '';
 		$realpath_css = $px->fs()->get_realpath($realpath_files_base.'/style.css');
 		if( strlen($kflowResult->css ?? '') ){
@@ -58,7 +58,7 @@ class kflow {
 				$px->fs()->mkdir_r(dirname($realpath_css));
 				$px->fs()->save_file($realpath_css, $kflowResult->css);
 			}
-			$src_css = '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/style.css')).'" />';
+			$src_css = '<link rel="stylesheet" href="'.htmlspecialchars($px->path_plugin_files($path_files_base.'style.css')).'" />';
 		}elseif(is_file($realpath_css)){
 			$px->fs()->rm($realpath_css);
 		}
@@ -72,7 +72,7 @@ class kflow {
 				$px->fs()->mkdir_r(dirname($realpath_js));
 				$px->fs()->save_file($realpath_js, $kflowResult->js);
 			}
-			$src_js = '<script src="'.htmlspecialchars($px->path_plugin_files('/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/script.js')).'"></script>';
+			$src_js = '<script src="'.htmlspecialchars($px->path_plugin_files($path_files_base.'script.js')).'"></script>';
 		}elseif(is_file($realpath_js)){
 			$px->fs()->rm($realpath_js);
 		}
@@ -106,6 +106,7 @@ class kflow {
 		// テーマを実行してHTMLを生成
 		$src_theme_layout = $this->bind_template($kflowResult->html);
 		$src_theme_layout = preg_replace('/(\<\/head\>)/si', $src_css.$src_js.'$1', $src_theme_layout);
+		$src_theme_layout = str_replace('./theme_files/layouts/'.urlencode($pageInfo['layout']).'/resources/', $px->path_plugin_files($path_files_base.'resources/'), $src_theme_layout);
 
 		$px->fs()->save_file($realpath_plugin_private_cache.'layout.html', $src_theme_layout);
 		$src = self::exec_content( $px, $theme, $realpath_plugin_private_cache.'layout.html' );
