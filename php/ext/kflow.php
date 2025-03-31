@@ -28,8 +28,8 @@ class kflow {
 	 */
 	public function bind( $px, $theme, $pageInfo, $path_theme_layout_file ){
 
-		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/_kflow/'.urlencode($this->multitheme->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/');
-		$path_files_base = '/kflow/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/';
+		$realpath_plugin_private_cache = $px->realpath_plugin_private_cache('/'.urlencode($this->multitheme->get_theme_id()).'/'.urlencode($pageInfo['layout']).'/_kflow/');
+		$path_files_base = '/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/_kflow/';
 		$realpath_files_base = $px->realpath_plugin_files($path_files_base);
 		$px->fs()->mkdir_r($realpath_plugin_private_cache);
 
