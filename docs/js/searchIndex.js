@@ -56,6 +56,11 @@ Search.appendIndex(
             "summary": "\u30C6\u30FC\u30DE\u30EA\u30BD\u30FC\u30B9\u3078\u306E\u30D1\u30B9\u3092\u53D6\u5F97\u3059\u308B",
             "url": "classes/tomk79-pickles2-multitheme-template-utility.html#method_files"
         },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\template_utility\u003A\u003Arealpath_theme_dir\u0028\u0029",
+            "name": "realpath_theme_dir",
+            "summary": "\u30C6\u30FC\u30DE\u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u3078\u306E\u30D1\u30B9\u3092\u53D6\u5F97\u3059\u308B",
+            "url": "classes/tomk79-pickles2-multitheme-template-utility.html#method_realpath_theme_dir"
+        },                {
             "fqsen": "\\tomk79\\pickles2\\multitheme\\template_utility\u003A\u003A\u0024px",
             "name": "px",
             "summary": "Pickles\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8",

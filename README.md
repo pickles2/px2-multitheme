@@ -184,7 +184,7 @@ Pickles 2 にある機能の他に、 px2-multitheme の独自のAPIも提供さ
 
 - kflow形式のテーマを処理できるようになった。
 
-### pickles2/px2-multitheme v2.1.2 (リリース日未定)
+### pickles2/px2-multitheme v2.1.2 (2025年4月3日)
 
 - 同梱のプラグインが、より直接的な表現で設定できるようになった。
 - `$theme->realpath_theme_dir()` を追加した。
