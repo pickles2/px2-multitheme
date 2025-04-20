@@ -32,10 +32,38 @@ class kflow {
 		$path_files_base = '/'.urlencode($this->multitheme->get_theme_id()).'/layouts/'.urlencode($pageInfo['layout']).'/_kflow/';
 		$realpath_files_base = $px->realpath_plugin_files($path_files_base);
 		$px->fs()->mkdir_r($realpath_plugin_private_cache);
+		$utils = new Utils();
 
+		// --------------------------------------
+		// テンプレートパラメータを生成
+		$breadcrumb_info = array();
+		foreach($px->site()->get_breadcrumb_array() as $item){
+			$breadcrumb_info[] = $px->site()->get_page_info($item);
+		}
+		$bros_info = array();
+		foreach($px->site()->get_bros(null, array('filter' => false,)) as $item){
+			$bros_info[] = $px->site()->get_page_info($item);
+		}
+		$children_info = array();
+		foreach($px->site()->get_children(null, array('filter' => false,)) as $item){
+			$children_info[] = $px->site()->get_page_info($item);
+		}
+		$extraValues = (object) array(
+			'site' => (object) array(
+				'name' => $px->conf()->name ?? '',
+			),
+			'pageInfo' => $px->site()->get_current_page_info() ?? (object) array(),
+			'breadcrumb' => $breadcrumb_info ?? array(),
+			'parent' => $px->site()->get_page_info($px->site()->get_parent()) ?? (object) array(),
+			'bros' => $bros_info ?? array(),
+			'children' => $children_info ?? array(),
+		);
+
+		// --------------------------------------
+		// キャッシュが新しいので、キャッシュを返す
 		if( $px->fs()->is_newer_a_than_b($realpath_plugin_private_cache.'layout.html', $path_theme_layout_file) ){
-			// キャッシュが新しいので、キャッシュを返す
 			$src = self::exec_content( $px, $theme, $realpath_plugin_private_cache.'layout.html' );
+			$src = $utils->bindTwig($src, $extraValues);
 			return $src;
 		}
 
@@ -46,6 +74,7 @@ class kflow {
 			$path_theme_layout_file,
 			array(
 				'assetsPrefix' => './theme_files/layouts/'.urlencode($pageInfo['layout']).'/resources/',
+				'extra' => $extraValues,
 			)
 		);
 
@@ -110,6 +139,7 @@ class kflow {
 
 		$px->fs()->save_file($realpath_plugin_private_cache.'layout.html', $src_theme_layout);
 		$src = self::exec_content( $px, $theme, $realpath_plugin_private_cache.'layout.html' );
+		$src = $utils->bindTwig($src, $extraValues);
 
 		return $src;
 	}
