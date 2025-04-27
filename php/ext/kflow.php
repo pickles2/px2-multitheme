@@ -40,14 +40,41 @@ class kflow {
 		foreach($px->site()->get_breadcrumb_array() as $item){
 			$breadcrumb_info[] = $px->site()->get_page_info($item);
 		}
+
 		$bros_info = array();
 		foreach($px->site()->get_bros(null, array('filter' => false,)) as $item){
 			$bros_info[] = $px->site()->get_page_info($item);
 		}
+
 		$children_info = array();
 		foreach($px->site()->get_children(null, array('filter' => false,)) as $item){
 			$children_info[] = $px->site()->get_page_info($item);
 		}
+
+		$global_menu = $px->site()->get_global_menu();
+		$global_menu_info = array();
+		foreach($global_menu as $page_id){
+			array_push($global_menu_info, $px->site()->get_page_info($page_id));
+		}
+
+		$shoulder_menu = $px->site()->get_shoulder_menu();
+		$shoulder_menu_info = array();
+		foreach($shoulder_menu as $page_id){
+			array_push($shoulder_menu_info, $px->site()->get_page_info($page_id));
+		}
+
+		$category_top = $px->site()->get_category_top();
+		$category_top_info = false;
+		if( $category_top !== false ){
+			$category_top_info = $px->site()->get_page_info($category_top);
+		}
+
+		$category_sub_menu = $px->site()->get_children($category_top);
+		$category_sub_menu_info = array();
+		foreach($category_sub_menu as $page_id){
+			array_push($category_sub_menu_info, $px->site()->get_page_info($page_id));
+		}
+
 		$extraValues = (object) array(
 			'site' => (object) array(
 				'name' => $px->conf()->name ?? '',
@@ -57,6 +84,10 @@ class kflow {
 			'parent' => $px->site()->get_page_info($px->site()->get_parent()) ?? (object) array(),
 			'bros' => $bros_info ?? array(),
 			'children' => $children_info ?? array(),
+			'globalMenu' => $global_menu_info ?? array(),
+			'shoulderMenu' => $shoulder_menu_info ?? array(),
+			'categoryTop' => $category_top_info ?? array(),
+			'categorySubMenu' => $category_sub_menu_info ?? array(),
 		);
 
 		// --------------------------------------
