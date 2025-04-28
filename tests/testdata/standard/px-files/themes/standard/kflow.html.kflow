@@ -26,9 +26,9 @@ overflow: hidden;
     <p>kflow main contents sample</p>
 </div><div class="px2-p"><p>テストブロック</p></div><bowl/><custom-component-002/><custom-component-001 width="100%" image="{&quot;assetId&quot;:&quot;e6fc4809-2ea8-4278-b1af-e6f67ca75d10&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo001_thumb.jpg&quot;}"><div/></custom-component-001>
 <div>
-	<div><img class="test-image-sample" alt="{&quot;text&quot;:&quot;1つめのaltテキスト&quot;}" image="{&quot;assetId&quot;:&quot;95a0cd90-0468-4f12-806f-4a13a9327a8b&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo009_thumb.jpg&quot;}"/><div>
+	<div><img class="test-image-sample" alt="1つめのaltテキスト" image="{&quot;assetId&quot;:&quot;95a0cd90-0468-4f12-806f-4a13a9327a8b&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo009_thumb.jpg&quot;}"/><div>
 			<p>テスト文字列</p>
-		</div><div class="test-div-class-001"/><img alt="{&quot;text&quot;:&quot;2つめのaltテキスト \&quot;escape HTML\&quot;&quot;}" image="{&quot;assetId&quot;:&quot;1e7b6006-3fb3-4eef-9762-31938013db64&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo010_thumb.jpg&quot;}"/><hr/></div><p class="paragraph">
+		</div><div class="test-div-class-001"/><img alt="2つめのaltテキスト &quot;escape HTML&quot;" image="{&quot;assetId&quot;:&quot;1e7b6006-3fb3-4eef-9762-31938013db64&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo010_thumb.jpg&quot;}"/><hr/></div><p class="paragraph">
 		
 		
 		

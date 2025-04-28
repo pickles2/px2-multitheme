@@ -90,6 +90,27 @@ class kflow {
 			'href' => function($path) use ($px){
 				return $px->href($path);
 			},
+			'getCurrentPageInfo' => function() use ($px){
+				return $px->site()->get_current_page_info();
+			},
+			'getPageInfo' => function($path) use ($px){
+				return $px->site()->get_page_info($path);
+			},
+			'getBros' => function($path, $options = array()) use ($px){
+				return $px->site()->get_bros($path, $options);
+			},
+			'getChildren' => function($path, $options = array()) use ($px){
+				return $px->site()->get_children($path, $options);
+			},
+			'getCategoryTop' => function($path) use ($px){
+				return $px->site()->get_category_top($path);
+			},
+			'getGlobalMenu' => function() use ($px){
+				return $px->site()->get_global_menu();
+			},
+			'getShoulderMenu' => function() use ($px){
+				return $px->site()->get_shoulder_menu();
+			},
 		);
 
 		// --------------------------------------
