@@ -87,22 +87,22 @@ class kflow {
 			'shoulderMenu' => $shoulder_menu_info ?? array(),
 			'categoryTop' => $category_top_info ?? array(),
 			'categorySubMenu' => $category_sub_menu_info ?? array(),
-			'href' => function($path) use ($px){
+			'href' => function($path = null) use ($px){
 				return $px->href($path);
 			},
 			'getCurrentPageInfo' => function() use ($px){
 				return $px->site()->get_current_page_info();
 			},
-			'getPageInfo' => function($path) use ($px){
+			'getPageInfo' => function($path = null) use ($px){
 				return $px->site()->get_page_info($path);
 			},
-			'getBros' => function($path, $options = array()) use ($px){
+			'getBros' => function($path = null, $options = array()) use ($px){
 				return $px->site()->get_bros($path, $options);
 			},
-			'getChildren' => function($path, $options = array()) use ($px){
+			'getChildren' => function($path = null, $options = array()) use ($px){
 				return $px->site()->get_children($path, $options);
 			},
-			'getCategoryTop' => function($path) use ($px){
+			'getCategoryTop' => function($path = null) use ($px){
 				return $px->site()->get_category_top($path);
 			},
 			'getGlobalMenu' => function() use ($px){
