@@ -28,6 +28,12 @@ class Utils {
 			));
 			$twig = new \Twig_Environment($loader, array('debug' => true, 'autoescape' => 'html'));
 			$twig->addExtension(new \Twig_Extension_Debug());
+			foreach( $data as $fncName=>$callback ){
+				if( is_callable($callback) ){
+					$function = new \Twig_SimpleFunction($fncName, $callback);
+					$twig->addFunction($function);
+				}
+			}
 			foreach( $funcs as $fncName=>$callback ){
 				$function = new \Twig_SimpleFunction($fncName, $callback);
 				$twig->addFunction($function);
@@ -41,6 +47,12 @@ class Utils {
 			]);
 			$twig = new \Twig\Environment($loader, array('debug' => true, 'autoescape' => 'html'));
 			$twig->addExtension(new \Twig\Extension\DebugExtension());
+			foreach( $data as $fncName=>$callback ){
+				if( is_callable($callback) ){
+					$function = new \Twig\TwigFunction($fncName, $callback);
+					$twig->addFunction($function);
+				}
+			}
 			foreach( $funcs as $fncName=>$callback ){
 				$function = new \Twig\TwigFunction($fncName, $callback);
 				$twig->addFunction($function);

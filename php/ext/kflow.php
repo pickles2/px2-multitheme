@@ -87,6 +87,9 @@ class kflow {
 			'shoulderMenu' => $shoulder_menu_info ?? array(),
 			'categoryTop' => $category_top_info ?? array(),
 			'categorySubMenu' => $category_sub_menu_info ?? array(),
+			'href' => function($path) use ($px){
+				return $px->href($path);
+			},
 		);
 
 		// --------------------------------------
