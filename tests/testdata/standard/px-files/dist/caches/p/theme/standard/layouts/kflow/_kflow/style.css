@@ -6,17 +6,11 @@ overflow: hidden;
 .theme-paragraph {
 margin: 1em 0;}
 .theme-test-div-class-001 {
-width: 110px;
-height: 80px;
-/* div class test */}
+/* div class test */ width: 110px; height: 80px;}
 .theme-cont-horizontal {
-display: flex;
-flex-direction: row;
-gap: 10px;}
+display: flex; flex-direction: row; gap: 10px;}
 .theme-px2-p {
-width: 85%;
-}
+width: 85%;}
 .theme-kf-kf1928bb222858994f-0 {
 width: 100%;
-
 }

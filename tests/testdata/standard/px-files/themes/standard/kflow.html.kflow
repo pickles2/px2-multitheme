@@ -14,9 +14,9 @@ border-radius: 5px;
 overflow: hidden;
 		</style>
 		<style class="paragraph">margin: 1em 0;</style>
-		<style class="test-div-class-001" width="110px" height="80px">/* div class test */</style>
-		<style class="cont-horizontal" contents-direction="horizontal">gap: 10px;</style>
-		<style class="px2-p" width="85%"/>
+		<style class="test-div-class-001">/* div class test */ width: 110px; height: 80px;</style>
+		<style class="cont-horizontal">display: flex; flex-direction: row; gap: 10px;</style>
+		<style class="px2-p">width: 85%;</style>
 	</styles>
 	<contents>
 		<content><div><sitetitle/><globalnavi/><shouldernavi/><breadcrumb/></div><div class="cont-horizontal">
@@ -24,7 +24,7 @@ overflow: hidden;
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
     <p>kflow main contents sample</p>
-</div><div class="px2-p"><p>テストブロック</p></div><bowl/><custom-component-002/><custom-component-001 width="100%" image="{&quot;assetId&quot;:&quot;e6fc4809-2ea8-4278-b1af-e6f67ca75d10&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo001_thumb.jpg&quot;}"><div/></custom-component-001>
+</div><div class="px2-p"><p>テストブロック</p></div><bowl/><custom-component-002/><custom-component-001 style="width: 100%;" image="{&quot;assetId&quot;:&quot;e6fc4809-2ea8-4278-b1af-e6f67ca75d10&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo001_thumb.jpg&quot;}"><div/></custom-component-001>
 <div>
 	<div><img class="test-image-sample" alt="1つめのaltテキスト" image="{&quot;assetId&quot;:&quot;95a0cd90-0468-4f12-806f-4a13a9327a8b&quot;,&quot;upload-file&quot;:&quot;C:\\fakepath\\photo009_thumb.jpg&quot;}"/><div>
 			<p>テスト文字列</p>
