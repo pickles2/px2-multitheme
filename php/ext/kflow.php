@@ -78,6 +78,7 @@ class kflow {
 		$extraValues = (object) array(
 			'config' => $px->conf(),
 			'topPageInfo' => $px->site()->get_page_info('') ?? (object) array(),
+			'currentPageInfo' => $px->site()->get_current_page_info() ?? (object) array(),
 			'pageInfo' => $px->site()->get_current_page_info() ?? (object) array(),
 			'breadcrumb' => $breadcrumb_info ?? array(),
 			'parent' => $px->site()->get_page_info($px->site()->get_parent()) ?? (object) array(),
