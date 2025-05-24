@@ -112,6 +112,9 @@ class kflow {
 			'getShoulderMenu' => function() use ($px){
 				return $px->site()->get_shoulder_menu();
 			},
+			'isPageInBreadcrumb' => function($page_id) use ($px){
+				return $px->site()->is_page_in_breadcrumb($page_id);
+			},
 		);
 
 		// --------------------------------------
