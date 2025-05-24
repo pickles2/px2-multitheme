@@ -232,7 +232,7 @@ class kflow {
 			}
 		}
 		$template = '<'.'%- body %'.'>';
-		$pathKflowThemeLayout = $this->multitheme->realpath_theme_dir().'/theme_settings/kflow/_layout.html';
+		$pathKflowThemeLayout = $this->multitheme->realpath_theme_dir().'/settings/kflow/_layout.html';
 		if(is_file($pathKflowThemeLayout)){
 			$template = file_get_contents( $pathKflowThemeLayout );
 		}
