@@ -86,6 +86,11 @@ Search.appendIndex(
             "summary": "constructor",
             "url": "classes/tomk79-pickles2-multitheme-theme.html#method___construct"
         },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\theme\u003A\u003Arealpath_theme_dir\u0028\u0029",
+            "name": "realpath_theme_dir",
+            "summary": "\u30C6\u30FC\u30DE\u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u306E\u30D1\u30B9\u3092\u53D6\u5F97\u3059\u308B",
+            "url": "classes/tomk79-pickles2-multitheme-theme.html#method_realpath_theme_dir"
+        },                {
             "fqsen": "\\tomk79\\pickles2\\multitheme\\theme\u003A\u003Aauto_select_theme\u0028\u0029",
             "name": "auto_select_theme",
             "summary": "auto\u0020select\u0020theme",
@@ -186,10 +191,55 @@ Search.appendIndex(
             "summary": "px2\u002Dmultitheme\u306E\u8A2D\u5B9A\u60C5\u5831",
             "url": "classes/tomk79-pickles2-multitheme-theme.html#property_conf"
         },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow",
+            "name": "kflow",
+            "summary": "Pickles2\u0020Multi\u0020Theme\u003A\u0020Kaleflower\u0020processor",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "constructor",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html#method___construct"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow\u003A\u003Abind\u0028\u0029",
+            "name": "bind",
+            "summary": "bind\u0020content\u0020to\u0020theme",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html#method_bind"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow\u003A\u003Aexec_content\u0028\u0029",
+            "name": "exec_content",
+            "summary": "\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u5B9F\u884C\u3059\u308B\u3002",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html#method_exec_content"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow\u003A\u003Abind_template\u0028\u0029",
+            "name": "bind_template",
+            "summary": "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3092\u30D0\u30A4\u30F3\u30C9\u3059\u308B\u3002",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html#method_bind_template"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\kflow\u003A\u003A\u0024multitheme",
+            "name": "multitheme",
+            "summary": "\u0024multitheme",
+            "url": "classes/tomk79-pickles2-multitheme-ext-kflow.html#property_multitheme"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\Utils",
+            "name": "Utils",
+            "summary": "Utility",
+            "url": "classes/tomk79-pickles2-multitheme-ext-Utils.html"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext\\Utils\u003A\u003AbindTwig\u0028\u0029",
+            "name": "bindTwig",
+            "summary": "build\u0020Twig",
+            "url": "classes/tomk79-pickles2-multitheme-ext-Utils.html#method_bindTwig"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
+        },                {
+            "fqsen": "\\tomk79\\pickles2\\multitheme\\ext",
+            "name": "ext",
+            "summary": "",
+            "url": "namespaces/tomk79-pickles2-multitheme-ext.html"
         },                {
             "fqsen": "\\tomk79\\pickles2\\multitheme",
             "name": "multitheme",
